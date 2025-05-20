@@ -18,16 +18,16 @@
 "eslint": "eslint .",
 "eslintfix": "eslint --fix ."
 },
-"homepage": "https://github.com/deylinqff/Kirito-Bot-MD",
+"homepage": "https://github.com/Deylin-Eliac/Kirito-Bot-MD",
 "author": {
 "name": "Deylin"
 },
 "repository": {
 "type": "git",
-"url": "git+https://github.com/deylinqff/Kirito-Bot-MD.git"
+"url": "git+https://github.com/Deylin-Eliac/Kirito-Bot-MD.git"
 },
 "bugs": {
-"url": "https://github.com/deylinqff/Kirito-Bot-MD/issues"
+"url": "https://github.com/Deylin-Eliac/Kirito-Bot-MD/issues"
 },
 "license": "GPL-3.0-or-later",
 "dependencies": {
