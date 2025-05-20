@@ -77,7 +77,7 @@ apt update && apt upgrade && pkg install -y git nodejs ffmpeg imagemagick yarn
 ```
 
 ```bash
-git clone https://github.com/deylinqff/Kirito-Bot-MD && cd Kirito-Bot-MD
+git clone https://github.com/Deylin-Eliac/Kirito-Bot-MD && cd Kirito-Bot-MD
 ```
 
 ```bash
