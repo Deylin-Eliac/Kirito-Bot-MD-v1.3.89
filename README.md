@@ -161,7 +161,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 ### **`🌟 Colaboradores`**
 <a href="https://github.com/Deylin-Eliac/kirito-Bot-MD/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=deylinqf/kirito-Bot-MD" /> 
+<img src="https://contrib.rocks/image?repo=Deylin-Eliac/kirito-Bot-MD" /> 
 </a>
 
 ---
