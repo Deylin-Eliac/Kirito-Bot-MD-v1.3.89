@@ -131,7 +131,7 @@ git clone https://github.com/Deylin-Eliac/Kirito-Bot-MD.git
 echo -e "\033[01;32m\033[01mLa clonación se ha descargado e instalado correctamente.\nThe clone has been downloaded and installed successfully.\n\033[0m"
 
 echo -e "\033[01;32m\033[01mCambiando al directorio del repositorio!!\nChanging to the repository Deylin!!\n\033[0m" 
-cd Kirito-Bot
+cd Kirito-Bot-MD
 
 echo -e "\e[36m
 █░█ █▀█ █▀▄ ▄▀█ ▀█▀ █▀▀   █▄█ ▄▀█ █▀█ █▄░█
