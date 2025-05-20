@@ -2,7 +2,7 @@
 
 #!/data/data/com.termux/files/usr/bin/bash 
 # Interpretación determinada para la ejecución     
-COMANDOS = "pkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/deylinqff/Kirito-Bot-MD\ncd Kirito-Bot-MD\nyarn install\nnpm install\nnpm start"
+COMANDOS = "pkg install git -y\npkg install nodejs -y\npkg install ffmpeg -y\npkg install imagemagick -y\npkg install -y yarn\ngit clone https://github.com/Deylin-Eliac/Kirito-Bot-MD\ncd Kirito-Bot-MD\nyarn install\nnpm install\nnpm start"
 
 echo -e "\e[35m
 
@@ -169,7 +169,7 @@ echo -e "\e[36m
 ✰ Mode by:
 » DEYLIN
 ✰ GitHub:
-» https://github.com/deylinqff
+» https://github.com/Deylin-Eliac 
 
 𝐆 𝐑 𝐀 𝐂 𝐈 𝐀 𝐒, 𝐏 𝐎 𝐑, 𝐏 𝐑 𝐄 𝐅 𝐄 𝐑 𝐈 𝐑 𝐍 𝐎 𝐒\n\e[0m"
 
