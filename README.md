@@ -153,15 +153,15 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ## 📊 **Estadísticas de GitHub**
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=deylinqff&repo=Kirito-Bot-MD&show_icons=true&theme=radical&hide_border=true" alt="Estadísticas de GitHub">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=deylinqff&repo=Kirito-Bot-MD&theme=radical&hide_border=true" alt="Racha de GitHub">
+  <img src="https://github-readme-stats.vercel.app/api?username=Deylin-Eliac&repo=Kirito-Bot-MD&show_icons=true&theme=radical&hide_border=true" alt="Estadísticas de GitHub">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Deylin-Eliac&repo=Kirito-Bot-MD&theme=radical&hide_border=true" alt="Racha de GitHub">
 </p>
 
 ---
 
 ### **`🌟 Colaboradores`**
-<a href="https://github.com/deylinqff/kirito-Bot-MD/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=deylinqff/kirito-Bot-MD" /> 
+<a href="https://github.com/Deylin-Eliac/kirito-Bot-MD/graphs/contributors">
+<img src="https://contrib.rocks/image?repo=deylinqf/kirito-Bot-MD" /> 
 </a>
 
 ---
@@ -169,7 +169,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 ### **`👑 Propietario`**
 
 <h1>Deylin 📚</h1>
-<a href="https://github.com/deylinqff"><img src="https://github.com/deylinqff.png" width="130" height="130" alt="
+<a href="https://github.com/Deylin-Eliac"><img src="https://github.com/Deylin-Eliac.png" width="130" height="130" alt="
 avaricia"/></a>
 
 
@@ -182,8 +182,8 @@ href="https://github.com/The-King-Destroy"><img src="https://github.com/The-King
 ## 👑 **CONTÁCTAME**
 
 <p align="center">
-  <a href="https://github.com/deylinqff">
-    <img src="https://img.shields.io/badge/GitHub-Deylinqff-181717?style=for-the-badge&logo=github">
+  <a href="https://github.com/Deylin-Eliac">
+    <img src="https://img.shields.io/badge/GitHub-Deylin-eliac-181717?style=for-the-badge&logo=github">
   </a>
   <a href="https://wa.me/50433191934">
     <img src="https://img.shields.io/badge/WhatsApp-Contactar-25D366?style=for-the-badge&logo=whatsapp">
