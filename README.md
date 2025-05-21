@@ -64,7 +64,7 @@ avaricia"/></a>
 # 👑 Instalación del Kirito-Bot-MD en Termux
 
 <details>
- <summary><b>👉 Click aquí para ver los comandos</b></summary>
+ <summary><b> 👉 Click para los ver Comandos</b></summary>
 
 ---
 
@@ -154,7 +154,6 @@ pm2 logs
 
 
 </details>
-
 
 ---
 
