@@ -86,6 +86,7 @@ cd Kirito-Bot-MD
 yarn install
 
 yarn start
+````
 
 > Nota: Si después de escanear el código QR aparecen letras rojas, es normal.
 
@@ -100,13 +101,14 @@ yarn start
 
 
 2. Navega al directorio del bot:
-
+```bash
 cd Kirito-Bot-MD
-
+```
 
 3. Inicia el bot nuevamente:
-
+```bash
 yarn start
+```
 
 
 
@@ -119,19 +121,20 @@ yarn start
 
 
 2. Ve al directorio del bot:
-
+```bash
 cd Kirito-Bot-MD
+```
 
 
 3. Elimina la sesión anterior:
-
+```bash
 rm -rf kiritoSession
-
+```
 
 4. Inicia el bot otra vez:
-
+```bash
 yarn start
-
+```
 
 
 
@@ -140,15 +143,15 @@ yarn start
 🕐 Mantener el bot activo 24/7 en Termux
 
 Este comando permite que el bot siga funcionando incluso si cierras Termux:
-
+```bash
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
-
+```
 > Para ver los registros del bot:
 
 
-
+```bash
 pm2 logs
-
+```
 
 ---
 
