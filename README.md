@@ -61,79 +61,94 @@ avaricia"/></a>
 
 
 
-#### **`👑 Instalación por termux`**
+# 👑 Instalación del Kirito-Bot-MD en Termux
 
 <details>
- <summary><b> 👉 Click para los ver Comandos</b></summary>
+ <summary><b>👉 Click aquí para ver los comandos</b></summary>
 
-#### **🪄 Instalación manual por termux**
-> copie y peguen en termux uno por uno 
+---
+
+## 🪄 Instalación manual paso a paso en Termux
+
+Copia y pega los siguientes comandos **uno por uno** en Termux:
+
 ```bash
 termux-setup-storage
-```
 
-```bash
-apt update && apt upgrade && pkg install -y git nodejs ffmpeg imagemagick yarn
-```
+pkg update -y && pkg upgrade -y
 
-```bash
-git clone https://github.com/Deylin-Eliac/Kirito-Bot-MD && cd Kirito-Bot-MD
-```
+pkg install git nodejs ffmpeg imagemagick yarn -y
 
-```bash
-yarn install && npm install
-```
+git clone https://github.com/Deylin-Eliac/Kirito-Bot-MD
 
-```bash
-npm start
-```
-> si despues de poner el numero de WhatsApp, y sale letras en roja no se preocupe es normal 
----
+cd Kirito-Bot-MD
 
-#### **🟢 Activar en caso de detenerse en termux**
+yarn install
 
-Si después de instalar el bot en Termux se detiene (pantalla en blanco, pérdida de conexión a Internet, reinicio del dispositivo), sigue estos pasos:
+yarn start
 
-1. Abre Termux y navega al directorio del bot:
-    ```bash
-    cd Kirito-Bot-MD
-    ```
+> Nota: Si después de escanear el código QR aparecen letras rojas, es normal.
 
-2. Inicia el bot nuevamente:
-    ```bash
-    npm start
-    ```
+
+
 
 ---
 
-#### **🔥 Obtener otro codigo qr en termux**
+🟢 ¿El bot se detuvo o cerraste Termux?
 
-Si después de instalar el bot en Termux y iniciar la session del bot (el numero se va a soporte, se cierra la conexión o demorastes al conectar), sigue estos pasos:
+1. Abre Termux.
 
-1. Abre Termux y navega al directorio del bot:
-    ```bash
-    cd Kirito-Bot-MD
-    ```
 
-2. Elimina la carpeta MiniSession:
-    ```bash
-    rm -rf kiritoSession
-    ```
+2. Navega al directorio del bot:
+
+cd Kirito-Bot-MD
+
 
 3. Inicia el bot nuevamente:
-    ```bash
-    npm start
-    ```
+
+yarn start
+
+
+
 
 ---
 
-### **😼 Para activar 24/7 (termux)**
+🔥 ¿Quieres escanear un nuevo código QR?
 
-> comando para obtener la bot 24/7 en termux
+1. Abre Termux.
 
-```bash
+
+2. Ve al directorio del bot:
+
+cd Kirito-Bot-MD
+
+
+3. Elimina la sesión anterior:
+
+rm -rf kiritoSession
+
+
+4. Inicia el bot otra vez:
+
+yarn start
+
+
+
+
+---
+
+🕐 Mantener el bot activo 24/7 en Termux
+
+Este comando permite que el bot siga funcionando incluso si cierras Termux:
+
 npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
-```
+
+> Para ver los registros del bot:
+
+
+
+pm2 logs
+
 
 ---
 
