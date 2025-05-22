@@ -20,6 +20,7 @@ let handler = async (m, { conn }) => {
         mensaje += `┃━━━━━━━━━━━━━━━━━━\n`;
     }
     mensaje += `┃Kirito-Bot-MD`;
+
     mensaje += `╰━━━━━━━━━━━━━━━━━━━━⬣`;
 
     if (!fs.existsSync(img)) {
