@@ -240,10 +240,9 @@ return
 
 let _user = global.db.data && global.db.data.users && global.db.data.users[m.sender]
 
-const owners = Array.isArray(global.owner) ? global.owner : []
-const isROwner = [conn.decodeJid(global.conn.user.id), ...owners.map(([number]) => number)]
-  .map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net')
-  .includes(m.sender)
+const isROwner = [conn.decodeJid(global.conn.user.id), ...global.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+const isOwner = isROwner || m.fromMe
+const isMods = global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
 const isPrems = isROwner || global.prems.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender) || _user.premium == true
 
 if (m.isBaileys) return
@@ -321,7 +320,7 @@ groupMetadata,
 user,
 bot,
 isROwner,
-//isOwner,
+isOwner,
 isRAdmin,
 isAdmin,
 isBotAdmin,
@@ -544,33 +543,32 @@ console.log(m, m.quoted, e)}
 let settingsREAD = global.db.data.settings[this.user.jid] || {}  
 if (opts['autoread']) await this.readMessages([m.key])
 
-if (db.data.chats[m.chat].reaction && m.text.match(/(ción|dad|aje|oso|izar|mente|pero|tion|age|ous|ate|and|but|ify|ai|kirito|a|s)/gi)) {
+if (db.data.chats[m.chat].reaction && m.text.match(/(ción|dad|aje|oso|izar|mente|pero|tion|age|ous|ate|and|but|ify|ai|yuki|a|s)/gi)) {
 let emot = pickRandom(["🍟", "😃", "😄", "😁", "😆", "🍓", "😅", "😂", "🤣", "🥲", "☺️", "😊", "😇", "🙂", "🙃", "😉", "😌", "😍", "🥰", "😘", "😗", "😙", "🌺", "🌸", "😚", "😋", "😛", "😝", "😜", "🤪", "🤨", "🌟", "🤓", "😎", "🥸", "🤩", "🥳", "😏", "💫", "😞", "😔", "😟", "😕", "🙁", "☹️", "😣", "😖", "😫", "😩", "🥺", "😢", "😭", "😤", "😠", "😡", "🤬", "🤯", "😳", "🥵", "🥶", "😶‍🌫️", "😱", "😨", "😰", "😥", "😓", "🤗", "🤔", "🫣", "🤭", "🤖", "🍭", "🤫", "🫠", "🤥", "😶", "📇", "😐", "💧", "😑", "🫨", "😬", "🙄", "😯", "😦", "😧", "😮", "😲", "🥱", "😴", "🤤", "😪", "😮‍💨", "😵", "😵‍💫", "🤐", "🥴", "🤢", "🤮", "🤧", "😷", "🤒", "🤕", "🤑", "🤠", "😈", "👿", "👺", "🧿", "🌩", "👻", "😺", "😸", "😹", "😻", "😼", "😽", "🙀", "😿", "😾", "🫶", "👍", "✌️", "🙏", "🫵", "🤏", "🤌", "☝️", "🖕", "🙏", "🫵", "🫂", "🐱", "🤹‍♀️", "🤹‍♂️", "🗿", "✨", "⚡", "🔥", "🌈", "🩷", "❤️", "🧡", "💛", "💚", "🩵", "💙", "💜", "🖤", "🩶", "🤍", "🤎", "💔", "❤️‍🔥", "❤️‍🩹", "❣️", "💕", "💞", "💓", "💗", "💖", "💘", "💝", "🚩", "👊", "⚡️", "💋", "🫰", "💅", "👑", "🐣", "🐤", "🐈"])
 if (!m.fromMe) return this.sendMessage(m.chat, { react: { text: emot, key: m.key }})
 }
 function pickRandom(list) { return list[Math.floor(Math.random() * list.length)]}
 }}
 
-global.dfail = (type, m, conn) => {
+global.dfail = (type, m, usedPrefix, command, conn) => {
 
-  let edadaleatoria = ['10', '28', '20', '40', '18', '21', '15', '11', '9', '17', '25'].getRandom();
-  let user2 = m.pushName || 'Anónimo';
-  let verifyaleatorio = ['registrar', 'reg', 'verificar', 'verify', 'register'].getRandom();
+let edadaleatoria = ['10', '28', '20', '40', '18', '21', '15', '11', '9', '17', '25'].getRandom()
+let user2 = m.pushName || 'Anónimo'
+let verifyaleatorio = ['registrar', 'reg', 'verificar', 'verify', 'register'].getRandom()
 
-  const msg = {
-  rowner: `*〘 ${comando} 〙 es una función exclusiva de los propietarios principales. Tu acceso no está autorizado.*`,
-  owner: `*〘 ${comando} 〙 solo puede ser ejecutado por los desarrolladores. No tienes los permisos necesarios.*`,
-  mods: `*〘 ${comando} 〙 está reservado para moderadores. Tu perfil no cumple con los requisitos.*`,
-  premium: `*〘 ${comando} 〙 es un beneficio exclusivo para usuarios premium. Este privilegio aún no te corresponde.*`,
-  group: `*〘 ${comando} 〙 solo está disponible en grupos. Este entorno no es válido.*`,
-  private: `*〘 ${comando} 〙 debe utilizarse en un chat privado. Intenta de nuevo en el canal adecuado.*`,
-  admin: `*〘 ${comando} 〙 requiere permisos de administrador. Acceso denegado.*`,
-  botAdmin: `*Para ejecutar 〘 ${comando} 〙, el bot necesita ser administrador. Por favor, actualiza los permisos.*`,
-  unreg: `*Para usar 〘 ${comando} 〙 primero debes registrarte.*\n\n*Utiliza:* _#${verifyaleatorio} ${user2}.${edadaleatoria}_`,
-  restrict: `*Esta función está desactivada. No se permiten excepciones.*`
+const msg = {
+rowner: `『✦』El comando *${comando}* solo puede ser usado por los creadores del bot.`, 
+owner: `『✦』El comando *${comando}* solo puede ser usado por los desarrolladores del bot.`, 
+mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores del bot.`, 
+premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`, 
+group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
+private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
+admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
+botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
+unreg: `『✦』El comando *${comando}* solo puede ser usado por los usuarios registrado, registrate usando:\n> » #${verifyaleatorio} ${user2}.${edadaleatoria}`,
+restrict: `『✦』Esta caracteristica está desactivada.`
 }[type];
-
-  if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'));}
+if (msg) return m.reply(msg).then(_ => m.react('✖️'))}
 
 let file = global.__filename(import.meta.url, true)
 watchFile(file, async () => {
