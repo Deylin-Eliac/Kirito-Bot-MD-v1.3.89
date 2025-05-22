@@ -11,7 +11,7 @@ import fs, {readdirSync, statSync, unlinkSync, existsSync, mkdirSync, readFileSy
 import yargs from 'yargs';
 import {spawn} from 'child_process'
 import lodash from 'lodash'
-import { yukiJadiBot } from './plugins/jadibot-serbot.js';
+import { kiritoJadiBot } from './plugins/jadibot-serbot.js';
 import chalk from 'chalk'
 import syntaxerror from 'syntax-error'
 import {tmpdir} from 'os'
@@ -41,15 +41,15 @@ const PORT = process.env.PORT || process.env.SERVER_PORT || 3000
 //let require = createRequire(megu)
 let { say } = cfonts
 
-console.log(chalk.bold.redBright(`\n✰ Iniciando Yuki-Suou-Bot ✰\n`))
+console.log(chalk.bold.redBright(`\n✰ Iniciando Kirito-Bot-MD ✰\n`))
 
-say('YukiBot-MD', {
+say('Kirito-Bot-MD', {
 font: 'block',
 align: 'center',
 colors: ['magentaBright']
 })
 
-say(`Developed By • The-King-Destroy`, {
+say(`Developed By Deylin`, {
 font: 'console',
 align: 'center',
 colors: ['blueBright']
