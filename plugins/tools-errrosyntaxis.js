@@ -28,7 +28,7 @@ var handler = async (m, { usedPrefix, command }) => {
         }
 
         if (!hasErrors) {
-            response += '${emoji} ¡Todo está en orden! No se detectaron errores de sintaxis.';
+            response += `${emoji} ¡Todo está en orden! No se detectaron errores de sintaxis.`;
         }
 
         await conn.reply(m.chat, response, m, rcanal);
