@@ -7,7 +7,7 @@ import fetch from 'node-fetch'
 
 export async function before(m, { conn, participants, groupMetadata }) {
   if (!m.messageStubType || !m.isGroup) return !0;
-  if (m.chat !== '120363416711925079@g.us') return !0; 
+  if (m.chat !== '120363402481697721@g.us') return !0; 
 
   let who = m.messageStubParameters[0];
   let taguser = `@${who.split('@')[0]}`;
