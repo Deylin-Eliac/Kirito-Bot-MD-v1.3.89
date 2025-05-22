@@ -13,7 +13,7 @@ async function handler(m, { conn }) {
   const about = (await conn.fetchStatus(ownerJid).catch(() => {}))?.status || 'estoy disponible para responder a tus preguntas';
   const empresa = 'Deylin - Servicios Tecnológicos';
 
-  
+
   const vcard = `
 BEGIN:VCARD
 VERSION:3.0
@@ -35,8 +35,12 @@ X-WA-BIZ-DESCRIPTION:${about}
 END:VCARD
   `.trim();
 
-  
-   conn.reply(m.chat, vcard, m, rcanal);
+
+  await conn.sendMessage(
+    m.chat,
+    { contacts: { displayName: name, contacts: [{ vcard }] } },
+    { quoted: fkontak }
+  );
 }
 
 handler.help = ['owner'];
