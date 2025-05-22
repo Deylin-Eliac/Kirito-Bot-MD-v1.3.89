@@ -3,7 +3,6 @@ import fs from 'fs';
 let handler = async (m, { conn }) => {
     let img = './src/catalogo.jpg';
 
-    // Miembros del equipo con sus roles
     const staff = [
         { number: '50433191934', name: 'Deylin 👑', role: 'Creador' },
         { number: '573154062343', name: 'https', role: 'Desarrollador' },
