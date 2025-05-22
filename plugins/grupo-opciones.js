@@ -50,7 +50,7 @@ const handler = async (m, { conn }) => {
 🔞 *Modo +18:* ${estado(nsfw)}  
 > ➨ *Descripción:* Activa o desactiva los comandos +18 y contenido para adultos en el grupo.
 
-_*📝 Ejemplo de uso (#enable antilink).*_`;
+_*📝 Ejemplo de uso (#antilink on).*_`;
 
   await conn.sendMessage(m.chat, {
     text: text,
