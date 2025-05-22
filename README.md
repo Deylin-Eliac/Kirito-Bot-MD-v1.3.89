@@ -76,15 +76,11 @@ Copia y pega los siguientes comandos **uno por uno** en Termux:
 termux-setup-storage
 
 pkg update -y && pkg upgrade -y
-
 pkg install git nodejs ffmpeg imagemagick yarn -y
-
+pkg install yarn
 git clone https://github.com/Deylin-Eliac/Kirito-Bot-MD
-
 cd Kirito-Bot-MD
-
 yarn install
-
 yarn start
 ````
 
