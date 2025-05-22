@@ -64,7 +64,7 @@ _*📝 Ejemplo de uso (#antilink on).*_`;
         renderLargerThumbnail: true
       }
     }
-  }, { quoted: m });
+  }, { quoted: fkontak });
 };
 
 handler.help = ['configuraciongrupo'];
