@@ -18,6 +18,7 @@ let handler = async (m, { conn }) => {
         mensaje += `┃ Nombre: ${miembro.name}\n`;
         mensaje += `┃ Contacto: https://wa.me/${miembro.number}\n`;
         mensaje += `┃━━━━━━━━━━━━━━━━━━\n`;
+        mensaje += `┃Kirito-Bot-MD 
     }
 
     mensaje += `╰━━━━━━━━━━━━━━━━━━━━⬣`;
