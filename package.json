@@ -10,7 +10,7 @@
 "plugins": "plugins"
 },
 "scripts": {
-"start": "node --input-type=module index.js",
+"start": "module index.js",
 "qr": "node index.js qr",
 "code": "node index.js code",
 "test": "node test.js",
