@@ -36,11 +36,7 @@ END:VCARD
   `.trim();
 
   
-  await conn.sendMessage(
-    m.chat,
-    { contacts: { displayName: name, contacts: [{ vcard }] } },
-    { quoted: fkontak }
-  );
+   conn.reply(m.chat, vcard, m, rcanal);
 }
 
 handler.help = ['owner'];
