@@ -6,9 +6,9 @@ let handler = async (m, { conn }) => {
     // Miembros del equipo con sus roles
     const staff = [
         { number: '50433191934', name: 'Deylin 👑', role: 'Creador' },
-        { number: '50412345678', name: 'Juan Dev', role: 'Desarrollador' },
-        { number: '50487654321', name: 'Ana Codes', role: 'Programadora' },
-        { number: '50411223344', name: 'Carlos Designer', role: 'Diseñador' },
+        { number: '573154062343', name: 'https', role: 'Desarrollador' },
+       // { number: '50487654321', name: 'Ana Codes', role: 'Programadora' },
+        //{ number: '50411223344', name: 'Carlos Designer', role: 'Diseñador' },
     ];
 
     let mensaje = `╭━━〔 *🌟 EQUIPO OFICIAL* 〕━━⬣\n`;
