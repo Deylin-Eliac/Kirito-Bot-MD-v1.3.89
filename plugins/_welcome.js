@@ -36,7 +36,7 @@ function obtenerPais(numero) {
 
 export async function before(m, { conn, participants, groupMetadata }) {
   if (!m.messageStubType || !m.isGroup) return;
-  if (m.chat === "120363416711925079@g.us") return;
+  if (m.chat === "120363402481697721@g.us") return;
 
   let who = m.messageStubParameters[0];
   let taguser = `@${who.split("@")[0]}`;
