@@ -21,5 +21,6 @@ let handler = async (m, { conn, text, isOwner }) => {
 handler.help = ['invite'];
 handler.tags = ['owner', 'tools'];
 handler.command = ['invite', 'join'];
+handler.rowner = true
 
 export default handler;
