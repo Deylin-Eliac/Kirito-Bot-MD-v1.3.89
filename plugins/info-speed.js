@@ -36,7 +36,7 @@ let texto = `${emoji} *${packname}*
 
 m.react('✈️')
 
-conn.reply(m.chat, texto, m, )
+conn.reply(m.chat, texto, m, rcanal)
 
 }
 handler.help = ['speed']
