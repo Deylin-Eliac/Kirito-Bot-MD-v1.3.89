@@ -17,8 +17,8 @@ var handler = async (m, { text, usedPrefix, command }) => {
   }
 }
 
-handler.command = ['modeia']
-handler.help = ['modeia', 'mode']
+handler.command = ['modeia', 'mode']
+handler.help = ['modeia']
 handler.tags = ['ai']
 handler.group = true
 handler.rowner = true
