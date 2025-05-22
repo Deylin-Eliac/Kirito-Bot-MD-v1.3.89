@@ -6,7 +6,7 @@ var handler = async (m, { usedPrefix, command }) => {
         await m.react('🔎'); 
         conn.sendPresenceUpdate('composing', m.chat);
 
-        const dirs = ['./plugins2', './plugins'];
+        const dirs = ['./plugins'];
         let response = `${emoji} *Revisión de Syntax Errors:*\n\n`;
         let hasErrors = false;
 
