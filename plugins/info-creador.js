@@ -13,7 +13,7 @@ async function handler(m, { conn }) {
   const about = (await conn.fetchStatus(ownerJid).catch(() => {}))?.status || `Hola, mucho gusto. Soy Deylin.
 Soy desarrollador de software y sitios web, apasionado por la tecnología, el diseño funcional y la innovación digital.
 
-Cada día me esfuerzo por aprender algo nuevo, mejorar mis habilidades y ofrecer soluciones eficientes y creativas a quienes confían en mi trabajo`';
+Cada día me esfuerzo por aprender algo nuevo, mejorar mis habilidades y ofrecer soluciones eficientes y creativas a quienes confían en mi trabajo`;
   const empresa = 'Deylin - Servicios Tecnológicos';
 
 
