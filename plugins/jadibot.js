@@ -1,133 +1,98 @@
 import { readdirSync, statSync, unlinkSync, existsSync, readFileSync, watch, rmSync, promises as fsPromises } from "fs";
 const fs = { ...fsPromises, existsSync };
-import path, { join } from 'path';
+import path, { join } from 'path' 
 import ws from 'ws';
 
-let handler = async (m, { conn, command, usedPrefix, args, text, isOwner }) => {
-  const isCommand1 = /^(deletesesion|deletebot|deletesession|deletesesaion)$/i.test(command);
-  const isCommand2 = /^(stop|pausarai|pausarbot)$/i.test(command);
-  const isCommand3 = /^(bots|sockets|socket)$/i.test(command);
+let handler = async (m, { conn: _envio, command, usedPrefix, args, text, isOwner }) => {
+  const isCommand1 = /^(deletesesion|deletebot|deletesession|deletesesaion)$/i.test(command)
+  const isCommand2 = /^(stop|pausarai|pausarbot)$/i.test(command)
+  const isCommand3 = /^(bots|sockets|socket)$/i.test(command)
 
   async function reportError(e) {
-    console.log(e);
-    await m.reply(
-`╭─「 Kirito-Bot: Error 」
-│ Ocurrió un error al ejecutar el comando.
-│ 
-│ Detalles: ${e.message || e}
-╰────`);
+    await m.reply(`Kirito-Bot: ocurrió un error.`)
+    console.log(e)
   }
 
   switch (true) {
-    case isCommand1: {
-      let who = m.mentionedJid?.[0] || (m.fromMe ? conn.user.jid : m.sender);
-      let uniqid = who.split`@`[0];
-      const sessionPath = `./${jadi}/${uniqid}`;
+    case isCommand1:
+      let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+      let uniqid = `${who.split`@`[0]}`
+      const path = `./${jadi}/${uniqid}`
 
-      if (!fs.existsSync(sessionPath)) {
-        await conn.sendMessage(m.chat, {
-          text:
-`╭─「 Kirito-Bot 」
-│ No hay sesión activa con ese ID.
-│ 
-│ Usa el comando así:
-│ ${usedPrefix + command} (ID opcional)
-╰────`,
-        }, { quoted: m });
-        return;
+      if (!await fs.existsSync(path)) {
+        await conn.sendMessage(m.chat, { text: `Kirito-Bot: no hay sesión activa.\nUsa: ${usedPrefix + command}\nSi tienes ID:\n${usedPrefix + command} (ID)` }, { quoted: m })
+        return
       }
 
       if (global.conn.user.jid !== conn.user.jid) {
-        await conn.sendMessage(m.chat, {
-          text:
-`╭─「 Kirito-Bot 」
-│ Este comando solo funciona en el bot principal.
-│ 
-│ Enlace directo:
-│ https://wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix + command}
-╰────`,
-        }, { quoted: m });
-        return;
+        return conn.sendMessage(m.chat, {
+          text: `Este comando solo funciona en el bot principal.\nLink: https://wa.me/${global.conn.user.jid.split`@`[0]}?text=${usedPrefix + command}`
+        }, { quoted: m })
+      } else {
+        await conn.sendMessage(m.chat, { text: `Kirito-Bot: sub-bot desconectado.` }, { quoted: m })
       }
-
-      await conn.sendMessage(m.chat, {
-        text:
-`╭─「 Kirito-Bot 」
-│ Sub-bot desconectado.
-╰────`,
-      }, { quoted: m });
 
       try {
-        fs.rmdir(sessionPath, { recursive: true, force: true });
-        await conn.sendMessage(m.chat, {
-          text:
-`╭─「 Kirito-Bot 」
-│ Sesión eliminada correctamente.
-╰────`,
-        }, { quoted: m });
+        fs.rmdir(`./${jadi}/` + uniqid, { recursive: true, force: true })
+        await conn.sendMessage(m.chat, { text: `Sesión eliminada correctamente.` }, { quoted: m })
       } catch (e) {
-        return reportError(e);
+        reportError(e)
       }
-      break;
-    }
+      break
 
-    case isCommand2: {
-      if (global.conn.user.jid === conn.user.jid) {
-        await conn.reply(m.chat,
-`╭─「 Kirito-Bot 」
-│ Este comando es exclusivo para sub-bots.
-╰────`, m);
+    case isCommand2:
+      if (global.conn.user.jid == conn.user.jid) {
+        conn.reply(m.chat, `Solo los sub-bots pueden usar este comando.`, m)
       } else {
-        await conn.reply(m.chat,
-`╭─「 Kirito-Bot 」
-│ Sub-bot desactivado correctamente.
-╰────`, m);
-        conn.ws.close();
+        await conn.reply(m.chat, `Kirito-Bot desactivado.`, m)
+        conn.ws.close()
       }
-      break;
-    }
+      break
 
-    case isCommand3: {
+    case isCommand3:
       const usersMap = new Map();
-for (const c of global.conns) {
-  if (c?.user?.jid && c.ws?.socket?.readyState !== ws.CLOSED && !usersMap.has(c.user.jid)) {
-    usersMap.set(c.user.jid, c);
-  }
-}
-const users = [...usersMap.values()];
+      for (const c of global.conns) {
+        if (c?.user?.jid && c.ws?.socket?.readyState !== ws.CLOSED && !usersMap.has(c.user.jid)) {
+          usersMap.set(c.user.jid, c);
+        }
+      }
+      const users = [...usersMap.values()];
 
-      const convertirMsADiasHorasMinutosSegundos = (ms) => {
-        let s = Math.floor(ms / 1000) % 60,
-            m = Math.floor(ms / 60000) % 60,
-            h = Math.floor(ms / 3600000) % 24,
-            d = Math.floor(ms / 86400000);
-        return `${d ? d + "d " : ""}${h ? h + "h " : ""}${m ? m + "m " : ""}${s ? s + "s" : ""}`.trim();
-      };
+      function convertirMsADiasHorasMinutosSegundos(ms) {
+        let segundos = Math.floor(ms / 1000);
+        let minutos = Math.floor(segundos / 60);
+        let horas = Math.floor(minutos / 60);
+        let días = Math.floor(horas / 24);
+        segundos %= 60;
+        minutos %= 60;
+        horas %= 24;
+        let resultado = "";
+        if (días) resultado += `${días}d `;
+        if (horas) resultado += `${horas}h `;
+        if (minutos) resultado += `${minutos}m `;
+        if (segundos) resultado += `${segundos}s`;
+        return resultado.trim();
+      }
 
       const message = users.map((v, i) =>
-`╭─「 Sub-Bot #${i + 1} 」
-│ Nombre  : ${v.user.name || 'Sub-Bot'}
-│ Enlace  : wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado
-│ Online  : ${v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : 'Desconocido'}
-╰────`).join('\n\n');
+`┌───────[ Sub-Bot #${i + 1} ]───────
+│ Nombre   : ${v.user.name || 'Sub-Bot'}
+│ Enlace   : https://wa.me/${v.user.jid.replace(/[^0-9]/g, '')}?text=${usedPrefix}estado
+│ Online   : ${v.uptime ? convertirMsADiasHorasMinutosSegundos(Date.now() - v.uptime) : 'Desconocido'}
+└──────────────────────────────`).join('\n\n')
 
-      const responseMessage =
-`╭─「 Kirito-Bot 」
-│ Sub-Bots activos: ${users.length}
-╰────\n\n${message || 'No hay sub-bots conectados.'}`;
+      const responseMessage = `*╔══[ KIRITO-BOT ]══╗*\n*║ Sub-Bots activos:* ${users.length}\n*╚════════════════╝*\n\n${message || 'No hay sub-bots conectados.'}`
 
-      await conn.sendMessage(m.chat, {
+      await _envio.sendMessage(m.chat, {
         text: responseMessage,
-        mentions: conn.parseMention(responseMessage)
-      }, { quoted: m });
-
-      break;
-    }
+        mentions: _envio.parseMention(responseMessage)
+      }, { quoted: fkontak })
+      break
   }
-};
+}
 
-handler.tags = ['serbot'];
-handler.help = ['sockets', 'deletesesion', 'pausarai'];
-handler.command = ['deletesesion', 'deletebot', 'deletesession', 'deletesesaion', 'stop', 'pausarai', 'pausarbot', 'bots', 'sockets', 'socket'];
+handler.tags = ['serbot']
+handler.help = ['sockets', 'deletesesion', 'pausarai']
+handler.command = ['deletesesion', 'deletebot', 'deletesession', 'deletesesaion', 'stop', 'pausarai', 'pausarbot', 'bots', 'sockets', 'socket']
 
-export default handler;
+export default handler
