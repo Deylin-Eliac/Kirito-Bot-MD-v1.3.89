@@ -89,17 +89,11 @@ let handler = async (m, { conn, command, usedPrefix, args, text, isOwner }) => {
 
     case isCommand3: {
       const usersMap = new Map();
-
 for (const c of global.conns) {
-  if (
-    c?.user?.jid &&
-    c.ws?.socket?.readyState !== ws.CLOSED &&
-    !usersMap.has(c.user.jid)
-  ) {
+  if (c?.user?.jid && c.ws?.socket?.readyState !== ws.CLOSED && !usersMap.has(c.user.jid)) {
     usersMap.set(c.user.jid, c);
   }
 }
-
 const users = [...usersMap.values()];
 
       const convertirMsADiasHorasMinutosSegundos = (ms) => {
