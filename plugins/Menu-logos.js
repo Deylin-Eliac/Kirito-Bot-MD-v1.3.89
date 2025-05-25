@@ -14,7 +14,6 @@ const estilosLogos = [
   { cmd: 'rainbowtext', emoji: '🌈' },
   { cmd: 'flagtext', emoji: '🏳️' },
   { cmd: 'flag3dtext', emoji: '🏁' },
-  { cmd: 'glitchtext Kirito-Bot-MD*', emoji: '❌' },
   { cmd: 'blackpinkstyle', emoji: '💖' },
   { cmd: 'multicoloredneon', emoji: '✨' },
   { cmd: 'underwatertext', emoji: '🌊' },
@@ -53,14 +52,15 @@ const estilosLogos = [
 ];
 
 const menuLogosHandler = async (m, { conn, usedPrefix }) => {
-  let texto = '*MENÚ DE LOGOS Y ESTILOS*\n\n';
+  let texto = '*╭━━〔  LOGOS Y ESTILOS  〕━━⬣*\n\n';
   texto += estilosLogos.map(l => `${l.emoji} *${usedPrefix + l.cmd}*`).join('\n');
-  texto += `\n\n*┗━━⊱ Usa así:* _${usedPrefix}comando tu texto_\nPor ejemplo: *${usedPrefix}glitchtext Kirito-Bot-MD*`;
-  await conn.reply(m.chat, texto, m);
+  texto += `\n\n*╰━━⊱ Usa así:* _${usedPrefix}comando tu texto_\nPor ejemplo: *${usedPrefix}glitchtext Kirito-Bot-MD*`;
+  
+  await conn.sendMessage(m.chat, { text: texto }, { quoted: m });
 };
 
-handler.help = ['logosmenu'];
-handler.tags = ['menu'];
-handler.command = ['mlog', 'logostylemenu', 'menulogos'];
+menuLogosHandler.help = ['logosmenu'];
+menuLogosHandler.tags = ['menu'];
+menuLogosHandler.command = /^logosmenu|logostylemenu|menulogos$/i;
 
 export default menuLogosHandler;
