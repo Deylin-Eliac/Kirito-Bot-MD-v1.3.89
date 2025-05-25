@@ -29,7 +29,7 @@ async function upscaleAnonymous(imageBuffer) {
     contentType: "image/jpeg",
   });
 
-  const { data } = await axios.post("https://inferenceengine.vyro.ai/", form, {
+  const { data } = await axios.post("https://inferenceengine.vyro.ai/remini.vyro", form, {
     headers: form.getHeaders(),
     responseType: "arraybuffer",
   });
