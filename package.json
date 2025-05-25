@@ -1,7 +1,7 @@
 {
 "name": "kirito-Bot-MD",
 "version": "2.2.0",
-"description": "WhatsApp Bot Multi Device",
+"description": "Super WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
 "directories": {
@@ -20,7 +20,7 @@
 },
 "homepage": "https://github.com/Deylin-Eliac/Kirito-Bot-MD",
 "author": {
-"name": "Deylin-Eliac"
+"name": "Deylin"
 },
 "repository": {
 "type": "git",
@@ -29,9 +29,9 @@
 "bugs": {
 "url": "https://github.com/Deylin-Eliac/Kirito-Bot-MD/issues"
 },
-"license": "MIT-License",
+"license": "GPL-3.0-or-later",
 "dependencies": {
-"@whiskeysockets/baileys": "npm:@itsukichan/baileys",
+"@whiskeysockets/baileys": "github:ds6/meta",
 "@adiwajshing/keyed-db": "^0.2.4",
 "@bochilteam/scraper": "^4.2.4",
 "@bochilteam/scraper-sosmed": "^1.0.5",
@@ -40,7 +40,7 @@
 "awesome-phonenumber": "^3.4.0",
 "ruhend-scraper": "^7.0.4",
 "gradient-string": "^2.0.2",
-"google-libphonenumber": "3.2.38",
+"google-libphonenumber": "3.2.40",
 "axios": "^1.1.2",
 "acrcloud": "^1.4.0",
 "form-data": "^4.0.0",
