@@ -1,1 +1,66 @@
-const _0x4ce060=_0x1892;(function(_0xc59747,_0x4a910d){const _0x5945c3=_0x1892,_0x2c6fdb=_0xc59747();while(!![]){try{const _0x229880=-parseInt(_0x5945c3(0x80))/0x1+-parseInt(_0x5945c3(0xa8))/0x2+-parseInt(_0x5945c3(0x68))/0x3*(-parseInt(_0x5945c3(0x9c))/0x4)+-parseInt(_0x5945c3(0x84))/0x5+parseInt(_0x5945c3(0x76))/0x6+parseInt(_0x5945c3(0x81))/0x7+parseInt(_0x5945c3(0x7b))/0x8*(-parseInt(_0x5945c3(0x99))/0x9);if(_0x229880===_0x4a910d)break;else _0x2c6fdb['push'](_0x2c6fdb['shift']());}catch(_0x10b8db){_0x2c6fdb['push'](_0x2c6fdb['shift']());}}}(_0x2d7f,0x558cf));function _0x2d7f(){const _0xb1ca61=['reply','deletingtext','join','command','tags','🏝️','gradienttext','angeltxt','menu','typographytext','2112378PHIGSG','amongustext','neonlight','papercutstyle','flag3dtext','2152CsJaJR','papercut3d','icecold','neonglitch','glitchtext\x20Kirito-Bot-MD*','72751tlGkWg','4488253PgOZfU','marvel','blackpinkstyle','2372755AaOShg','style','underwatertext','cmd','minion','emoji','🖍️','flagtext','map','neoncity','summerbeach','rainbowtext','🌧️','cloudsky','logosmenu','dragonball','matrix','glitchtext','🎚️','glowingtext','sandsummer','15588aPKUVV','multicoloredneon','equalizertext','1874680lUJThY','royaltext','pixelglitch','menulogos','pubglogo','*MENÚ\x20DE\x20LOGOS\x20Y\x20ESTILOS*\x0a\x0a','colorfulltext','harrypotter','steel','writetext','narutotext','rainytext','196574VRxfpJ','3uJKPUo','firetext','\x0a\x0a*┗━━⊱\x20Usa\x20así:*\x20_','graffititext'];_0x2d7f=function(){return _0xb1ca61;};return _0x2d7f();}function _0x1892(_0x33f875,_0xa9c701){const _0x2d7f72=_0x2d7f();return _0x1892=function(_0x189282,_0x5c81a1){_0x189282=_0x189282-0x68;let _0x4558ac=_0x2d7f72[_0x189282];return _0x4558ac;},_0x1892(_0x33f875,_0xa9c701);}const estilosLogos=[{'cmd':_0x4ce060(0x95),'emoji':'🟣'},{'cmd':_0x4ce060(0xa6),'emoji':'🍥'},{'cmd':_0x4ce060(0x93),'emoji':'🟠'},{'cmd':_0x4ce060(0x78),'emoji':'💡'},{'cmd':_0x4ce060(0xa0),'emoji':'🔫'},{'cmd':_0x4ce060(0xa3),'emoji':'⚡'},{'cmd':_0x4ce060(0x82),'emoji':'🦸'},{'cmd':_0x4ce060(0x9e),'emoji':'🔳'},{'cmd':_0x4ce060(0x77),'emoji':'👾'},{'cmd':_0x4ce060(0xa5),'emoji':'✍️'},{'cmd':'advancedglow','emoji':'🌟'},{'cmd':_0x4ce060(0x75),'emoji':'📝'},{'cmd':_0x4ce060(0x7e),'emoji':'🌈'},{'cmd':_0x4ce060(0x8b),'emoji':'🏳️'},{'cmd':_0x4ce060(0x7a),'emoji':'🏁'},{'cmd':_0x4ce060(0x6d),'emoji':'❌'},{'cmd':_0x4ce060(0x83),'emoji':'💖'},{'cmd':_0x4ce060(0x97),'emoji':'✨'},{'cmd':_0x4ce060(0x86),'emoji':'🌊'},{'cmd':'logomaker','emoji':'🖌️'},{'cmd':'cartoonstyle','emoji':'🎨'},{'cmd':_0x4ce060(0x79),'emoji':'✂️'},{'cmd':'watercolortext','emoji':_0x4ce060(0x8a)},{'cmd':'effectclouds','emoji':'☁️'},{'cmd':'blackpinklogo','emoji':'🌸'},{'cmd':_0x4ce060(0x72),'emoji':'🌀'},{'cmd':_0x4ce060(0x8e),'emoji':'🏖️'},{'cmd':'luxurygold','emoji':'🥇'},{'cmd':_0x4ce060(0x9a),'emoji':'💫'},{'cmd':_0x4ce060(0x98),'emoji':_0x4ce060(0x71)},{'cmd':'galaxywallpaper','emoji':'🪐'},{'cmd':_0x4ce060(0x85),'emoji':'💠'},{'cmd':'makingneon','emoji':'🔆'},{'cmd':_0x4ce060(0x9d),'emoji':'👑'},{'cmd':'freecreate','emoji':'🆓'},{'cmd':'galaxystyle','emoji':'🌌'},{'cmd':_0x4ce060(0xa7),'emoji':_0x4ce060(0x90)},{'cmd':_0x4ce060(0x6b),'emoji':_0x4ce060(0x8a)},{'cmd':_0x4ce060(0xa2),'emoji':'🌈'},{'cmd':_0x4ce060(0x9b),'emoji':_0x4ce060(0x96)},{'cmd':_0x4ce060(0x73),'emoji':'👼'},{'cmd':'starlight','emoji':'🌟'},{'cmd':_0x4ce060(0xa4),'emoji':'🔩'},{'cmd':_0x4ce060(0x8d),'emoji':'🌃'},{'cmd':_0x4ce060(0x91),'emoji':'☁️'},{'cmd':_0x4ce060(0x94),'emoji':'🟩'},{'cmd':_0x4ce060(0x88),'emoji':'💛'},{'cmd':_0x4ce060(0x7c),'emoji':'📐'},{'cmd':_0x4ce060(0x69),'emoji':'🔥'},{'cmd':_0x4ce060(0x7d),'emoji':'🧊'},{'cmd':_0x4ce060(0x8f),'emoji':'🌈'}],menuLogosHandler=async(_0x1eefdd,{conn:_0x8687ac,usedPrefix:_0x1166db})=>{const _0x1c49b0=_0x4ce060;let _0x235714=_0x1c49b0(0xa1);_0x235714+=estilosLogos[_0x1c49b0(0x8c)](_0x5ff924=>_0x5ff924[_0x1c49b0(0x89)]+'\x20*'+_0x1166db+_0x5ff924[_0x1c49b0(0x87)]+'*')[_0x1c49b0(0x6e)]('\x0a'),_0x235714+=_0x1c49b0(0x6a)+_0x1166db+'comando\x20tu\x20texto_\x0aPor\x20ejemplo:\x20*'+_0x1166db+_0x1c49b0(0x7f),await _0x8687ac[_0x1c49b0(0x6c)](_0x1eefdd['chat'],_0x235714,_0x1eefdd);};handler['help']=[_0x4ce060(0x9f)],handler[_0x4ce060(0x70)]=[_0x4ce060(0x74)],handler[_0x4ce060(0x6f)]=[_0x4ce060(0x9f),_0x4ce060(0x92),'logostylemenu'];export default menuLogosHandler;
+const estilosLogos = [
+  { cmd: 'glitchtext', emoji: '🟣' },
+  { cmd: 'narutotext', emoji: '🍥' },
+  { cmd: 'amongustext', emoji: '🟠' },
+  { cmd: 'neonlight', emoji: '💡' },
+  { cmd: 'pubglogo', emoji: '🔫' },
+  { cmd: 'dragonball', emoji: '⚡' },
+  { cmd: 'marvel', emoji: '🦸' },
+  { cmd: 'pixelglitch', emoji: '🔳' },
+  { cmd: 'matrix', emoji: '👾' },
+  { cmd: 'writetext', emoji: '✍️' },
+  { cmd: 'advancedglow', emoji: '🌟' },
+  { cmd: 'firetext', emoji: '📝' },
+  { cmd: 'rainbowtext', emoji: '🌈' },
+  { cmd: 'flagtext', emoji: '🏳️' },
+  { cmd: 'flag3dtext', emoji: '🏁' },
+  { cmd: 'glitchtext Kirito-Bot-MD*', emoji: '❌' },
+  { cmd: 'blackpinkstyle', emoji: '💖' },
+  { cmd: 'multicoloredneon', emoji: '✨' },
+  { cmd: 'underwatertext', emoji: '🌊' },
+  { cmd: 'logomaker', emoji: '🖌️' },
+  { cmd: 'cartoonstyle', emoji: '🎨' },
+  { cmd: 'papercutstyle', emoji: '✂️' },
+  { cmd: 'watercolortext', emoji: '🖍️' },
+  { cmd: 'effectclouds', emoji: '☁️' },
+  { cmd: 'blackpinklogo', emoji: '🌸' },
+  { cmd: 'typographytext', emoji: '🌀' },
+  { cmd: 'summerbeach', emoji: '🏖️' },
+  { cmd: 'luxurygold', emoji: '🥇' },
+  { cmd: 'gradienttext', emoji: '💫' },
+  { cmd: 'neonglitch', emoji: '🌧️' },
+  { cmd: 'galaxywallpaper', emoji: '🪐' },
+  { cmd: 'deletingtext', emoji: '💠' },
+  { cmd: 'makingneon', emoji: '🔆' },
+  { cmd: 'royaltext', emoji: '👑' },
+  { cmd: 'freecreate', emoji: '🆓' },
+  { cmd: 'galaxystyle', emoji: '🌌' },
+  { cmd: 'equalizertext', emoji: '🎚️' },
+  { cmd: 'icecold', emoji: '🖍️' },
+  { cmd: 'colorfulltext', emoji: '🌈' },
+  { cmd: 'papercut3d', emoji: '🌧️' },
+  { cmd: 'angeltxt', emoji: '👼' },
+  { cmd: 'starlight', emoji: '🌟' },
+  { cmd: 'steel', emoji: '🔩' },
+  { cmd: 'neoncity', emoji: '🌃' },
+  { cmd: 'cloudsky', emoji: '☁️' },
+  { cmd: 'logosmenu', emoji: '🟩' },
+  { cmd: 'emoji', emoji: '💛' },
+  { cmd: 'map', emoji: '📐' },
+  { cmd: 'graffititext', emoji: '🔥' },
+  { cmd: 'sandsummer', emoji: '🧊' },
+  { cmd: 'harrypotter', emoji: '🌈' }
+];
+
+const menuLogosHandler = async (m, { conn, usedPrefix }) => {
+  let texto = '*MENÚ DE LOGOS Y ESTILOS*\n\n';
+  texto += estilosLogos.map(l => `${l.emoji} *${usedPrefix + l.cmd}*`).join('\n');
+  texto += `\n\n*┗━━⊱ Usa así:* _${usedPrefix}comando tu texto_\nPor ejemplo: *${usedPrefix}glitchtext Kirito-Bot-MD*`;
+  await conn.reply(m.chat, texto, m);
+};
+
+handler.help = ['logosmenu'];
+handler.tags = ['menu'];
+handler.command = ['mlog', 'logostylemenu', 'menulogos'];
+
+export default menuLogosHandler;
