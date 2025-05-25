@@ -52,7 +52,7 @@ const estilosLogos = [
   { cmd: "rainbowtext",    emoji: "🌈" }
 ];
 
-const menuLogosHandler = async (m, { conn, usedPrefix }) => {
+const handler = async (m, { conn, usedPrefix }) => {
   let menuText = `*┏━━⊱  MENÚ DE LOGOS Y ESTILOS  ⊰━━┓*\n\n`;
 
   menuText += estilosLogos.map(e => `${e.emoji} *${usedPrefix}${e.cmd}*`).join('\n');
@@ -61,8 +61,8 @@ const menuLogosHandler = async (m, { conn, usedPrefix }) => {
   await conn.reply(m.chat, menuText, m);
 };
 
-menuLogosHandler.help = ['menulogos'];
-menuLogosHandler.tags = ['menu'];
-menuLogosHandler.command = ['menulogos', 'logosmenu', 'logostylemenu'];
+handler.help = ['menulogos'];
+handler.tags = ['menu'];
+handler.command = ['menulogos', 'logosmenu', 'logostylemenu'];
 
-export default menuLogosHandler;
+export default handler;
