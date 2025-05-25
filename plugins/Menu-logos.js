@@ -52,7 +52,7 @@ const estilosLogos = [
   { cmd: "rainbowtext",    emoji: "🌈" }
 ];
 
-const menuLogosHandler = async (m, { conn, usedPrefix }) => {
+const handler = async (m, { conn, usedPrefix }) => {
   let menuText = `*MENU DE LOGOS Y ESTILOS*\n\n`;
 
   menuText += estilosLogos.map(e => `${e.emoji} *${usedPrefix}${e.cmd}*`).join('\n');
