@@ -1,19 +1,26 @@
 import axios from 'axios';
-import { downloadContentFromMessage } from '@whiskeysockets/baileys';
 
 let handler = async (m, { conn }) => {
   try {
+    // Obtener meme desde la API
     const res = await axios.get('https://meme-api.com/gimme');
     const meme = res.data;
 
-    // Descargar la imagen en buffer
+    // Descargar imagen como buffer
     const buffer = (await axios.get(meme.url, { responseType: 'arraybuffer' })).data;
 
+    // Enviar imagen con datos
     await conn.sendMessage(m.chat, {
       image: buffer,
       mimetype: 'image/jpeg',
-      caption: `*${meme.title}*\nSubreddit: _${meme.subreddit}_\n👍 ${meme.ups}\n🔗 ${meme.postLink}`
+      caption: `*${meme.title}*\nSubreddit: _${meme.subreddit}_\n👍 ${meme.ups}`
     }, { quoted: m });
+
+    // Enviar enlace por separado para vista previa enriquecida
+    await conn.sendMessage(m.chat, {
+      text: meme.postLink
+    }, { quoted: m });
+
   } catch (e) {
     console.error(e);
     await conn.sendMessage(m.chat, {
