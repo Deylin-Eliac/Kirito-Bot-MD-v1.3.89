@@ -1,2 +1,5 @@
 let handler = async (m, { conn }) => {
-con.replay
+con.replay( m.chat,  'hola mundo', m)
+
+
+handler.comados
