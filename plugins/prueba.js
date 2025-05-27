@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-con.replay( m.chat,  'hola mundo', m)
+  return con.replay( m.chat,  'hola mundo', m)};
 
 
 handler.command = ['h']
