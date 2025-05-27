@@ -1,8 +1,8 @@
 let handler = async (m, { conn }) => {
-  return con.replay(m.chat, 'hola mundo', m)
+  return con.replay(m.chat, 'puto', m)
 };
 
 
-handler.command = ['deldescription', 'deldesc']
+handler.command = ['h']
 
 export default handler;
