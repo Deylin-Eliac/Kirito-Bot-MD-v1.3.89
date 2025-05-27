@@ -1,5 +1,5 @@
 let handler = async (m, { conn }) => {
-  return con.replay(m.chat, 'puto', m)
+  return conn.replay(m.chat, 'puto', m)
 };
 
 
