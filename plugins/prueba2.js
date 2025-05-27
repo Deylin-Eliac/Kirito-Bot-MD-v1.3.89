@@ -1,26 +1,63 @@
-conn.ev.on('group-participants.update', async (update) => {
-  try {
-    // Asegurarse de que existe el objeto de configuración del grupo
-    global.db.data.chats ||= {};
-    global.db.data.chats[update.id] ||= {};
+import axios from 'axios';
+import cheerio from 'cheerio';
+import FormData from 'form-data';
 
-    const chat = global.db.data.chats[update.id];
+const effects = {
+  narutotext: 'https://en.ephoto360.com/naruto-shippuden-logo-style-text-effect-online-808.html',
+  glitchtext: 'https://en.ephoto360.com/create-pixel-glitch-text-effect-online-769.html',
+  neonlight: 'https://en.ephoto360.com/neon-light-text-effect-online-882.html',
+  // Agrega más efectos si quieres
+};
 
-    for (let participant of update.participants) {
-      if (participant === conn.user.jid && update.action === 'add') {
-        if (chat.welcomed) return; // Ya se envió el mensaje antes
+async function generarLogo(tipo = 'narutotext', texto = 'Kirito-Bot') {
+  const url = effects[tipo.toLowerCase()];
+  if (!url) throw `Efecto "${tipo}" no válido. Prueba: narutotext, glitchtext, neonlight.`;
 
-        const metadata = await conn.groupMetadata(update.id);
-        const groupName = metadata.subject;
+  const res = await axios.get(url, {
+    headers: { 'User-Agent': 'Mozilla/5.0' }
+  });
 
-        await conn.sendMessage(update.id, {
-          text: `✨ ¡Hola a todos!\n\nSoy *Kirito-Bot MD*, uno de los mejores bots de WhatsApp desarrollado por *Deylin*.\n\nGracias por añadirme al grupo *${groupName}*.\n\nEscribe *.menu* para ver todos mis comandos.`
-        });
+  const $ = cheerio.load(res.data);
+  const token = $('input[name=token]').val();
+  const build_server = $('input[name=build_server]').val();
+  const build_server_id = $('input[name=build_server_id]').val();
 
-        chat.welcomed = true; // Marcar que ya se envió el mensaje
+  const form = new FormData();
+  form.append('text[]', texto);
+  form.append('token', token);
+  form.append('build_server', build_server);
+  form.append('build_server_id', build_server_id);
+
+  const generar = await axios.post(
+    'https://en.ephoto360.com/effect/create-image',
+    form,
+    {
+      headers: {
+        ...form.getHeaders(),
+        'User-Agent': 'Mozilla/5.0',
+        'Cookie': res.headers['set-cookie']?.join('; ') || ''
       }
     }
-  } catch (err) {
-    console.error('Error al enviar mensaje de bienvenida al grupo:', err);
+  );
+
+  const imageUrl = generar.data?.image;
+  return build_server + imageUrl;
+}
+
+let handler = async (m, { text, args, conn, usedPrefix, command }) => {
+  if (args.length < 2) {
+    throw `Uso incorrecto.\nEjemplo: ${usedPrefix + command} narutotext TuNombre`;
   }
-});
+
+  const tipo = args[0];
+  const texto = args.slice(1).join(' ');
+  const url = await generarLogo(tipo, texto);
+
+  await conn.sendMessage(m.chat, { image: { url }, caption: `Logo generado con efecto: ${tipo}` }, { quoted: m });
+};
+
+handler.help = ['ephoto <efecto> <texto>'];
+handler.tags = ['logo'];
+handler.command = ['ephoto', 'logo'];
+
+export default handler;
