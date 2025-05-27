@@ -1,4 +1,6 @@
-//Codígo creado por Destroy wa.me/584120346669
+
+// Codígo creado por Destroy wa.me/584120346669
+// Modificado por https://wa.me/573154062343
 
 import fs from 'fs';
 import path from 'path';
@@ -16,7 +18,7 @@ let handler = async (m, { conn, usedPrefix }) => {
 
     let name = conn.getName(who);
     let name2 = conn.getName(m.sender);
-    m.react('🫦');
+    m.react('💋');
 
     let str;
     if (m.mentionedJid.length > 0) {
@@ -28,27 +30,30 @@ let handler = async (m, { conn, usedPrefix }) => {
     }
     
     if (m.isGroup) {
-        let pp = 'https://telegra.ph/file/d6ece99b5011aedd359e8.mp4';
-        let pp2 = 'https://telegra.ph/file/d6ece99b5011aedd359e8.mp4';
-        let pp3 = 'https://telegra.ph/file/ba841c699e9e039deadb3.mp4';
-        let pp4 = 'https://telegra.ph/file/ba841c699e9e039deadb3.mp4';
-        let pp5 = 'https://telegra.ph/file/6497758a122357bc5bbb7.mp4';
-        let pp6 = 'https://telegra.ph/file/6497758a122357bc5bbb7.mp4';
-        let pp7 = 'https://telegra.ph/file/8c0f70ed2bfd95a125993.mp4';
-        let pp8 = 'https://telegra.ph/file/8c0f70ed2bfd95a125993.mp4';
-        let pp9 = 'https://telegra.ph/file/826ce3530ab20b15a496d.mp4';
-        let pp10 = 'https://telegra.ph/file/826ce3530ab20b15a496d.mp4';
-        let pp11 = 'https://telegra.ph/file/f66bcaf1effc14e077663.mp4';   
-        let pp12 = 'https://telegra.ph/file/f66bcaf1effc14e077663.mp4';
-        let pp13 = 'https://telegra.ph/file/e1dbfc56e4fcdc3896f08.mp4';
-        let pp14 = 'https://telegra.ph/file/e1dbfc56e4fcdc3896f08.mp4';
-        let pp15 = 'https://telegra.ph/file/0fc525a0d735f917fd25b.mp4';
-        let pp16 = 'https://telegra.ph/file/0fc525a0d735f917fd25b.mp4';
-        let pp17 = 'https://telegra.ph/file/68643ac3e0d591b0ede4f.mp4';
-        let pp18 = 'https://telegra.ph/file/68643ac3e0d591b0ede4f.mp4';
-        let pp19 = 'https://telegra.ph/file/af0fe6eb00bd0a8a9e3a0.mp4';
-    
-        const videos = [pp, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12, pp13, pp14, pp15, pp16, pp17, pp18, pp19];
+        let pp = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360416473.mp4';
+        let pp2 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360413151.mp4';
+        let pp3 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360408138.mp4';
+        let pp4 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360404752.mp4';
+        let pp5 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360400635.mp4';
+        let pp6 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360396672.mp4';
+        let pp7 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360392488.mp4';
+        let pp8 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360387132.mp4';
+        let pp9 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360381983.mp4';
+        let pp10 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360378757.mp4';
+        let pp11 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360373892.mp4';   
+        let pp12 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360370272.mp4';
+        let pp13 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360366015.mp4';
+        let pp14 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360357954.mp4';
+        let pp15 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360354316.mp4';
+        let pp16 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360350515.mp4';
+        let pp17 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360346691.mp4';
+        let pp18 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360341001.mp4';
+        let pp19 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360336842.mp4';
+        let pp20 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748360332407.mp4';
+        let pp21 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748359611075.mp4';
+        let pp22 = 'https://raw.githubusercontent.com/https0J/Hoshino-Adiciones/main/Contenido/1748359606416.mp4';
+
+        const videos = [pp, pp2, pp3, pp4, pp5, pp6, pp7, pp8, pp9, pp10, pp11, pp12, pp13, pp14, pp15, pp16, pp17, pp18, pp19, pp20, pp21, pp22];
         const video = videos[Math.floor(Math.random() * videos.length)];
 
         let mentions = [who];
