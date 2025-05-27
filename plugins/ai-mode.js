@@ -21,6 +21,5 @@ handler.command = ['modeia', 'mode']
 handler.help = ['modeia']
 handler.tags = ['ai']
 handler.group = true
-handler.rowner = true
 
 export default handler
