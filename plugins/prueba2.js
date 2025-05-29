@@ -15,14 +15,22 @@ const handler = async (m, { conn, text, command, usedPrefix }) => {
     await conn.sendMessage(groupId + '@g.us', { text: mensaje });
     m.reply(`✅ El bot se unió al grupo y envió el mensaje con éxito.`);
   } catch (error) {
-    console.error(error);
-    m.reply('❌ Error al unirse o enviar mensaje. Asegúrate de que el grupo no esté lleno o el enlace no esté vencido.');
+    console.error("Error al unirse o enviar mensaje:", error);
+    let errMsg = '❌ Error al unirse o enviar mensaje.';
+    if (error?.message?.includes('already')) {
+      errMsg += '\n📌 El bot ya está en el grupo.';
+    } else if (error?.message?.includes('not-authorized')) {
+      errMsg += '\n📌 El grupo está lleno o el enlace fue revocado.';
+    } else if (error?.message?.includes('invite code invalid')) {
+      errMsg += '\n📌 El código de invitación es inválido.';
+    }
+    m.reply(errMsg);
   }
 };
 
 handler.help = ['joingrp <enlace> | <mensaje>'];
 handler.tags = ['owner'];
-handler.command = ['joingrp', 'joinlink']; // Puedes agregar más aliases si deseas
+handler.command = ['joingrp', 'joinlink'];
 handler.owner = true;
 
 export default handler;
