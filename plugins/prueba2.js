@@ -1,63 +1,27 @@
-// plugins/admin-protection.js
+let handler = async (m, { conn, text, args, usedPrefix, command }) => {
+  if (!text) return m.reply(`✳️ Uso correcto:\n${usedPrefix + command} <enlace_del_grupo> | <mensaje>\n\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/ABCDEFGHIJKLMNO | Hola grupo!`);
 
-const handler = async (m, { conn, participants }) => {
-    try {
-        // Verificar si es un mensaje de grupo
-        if (!m.isGroup) return;
+  let [link, ...mensajePartes] = text.split("|");
+  let mensaje = mensajePartes.join("|").trim();
 
-        // Obtener información del grupo
-        const groupId = m.chat;
-        const botNumber = conn.user.jid;
+  if (!link.includes('chat.whatsapp.com')) return m.reply('❌ El enlace proporcionado no es válido.');
+  if (!mensaje) return m.reply('❌ Debes proporcionar un mensaje para enviar al grupo.');
 
-        // Obtener los administradores del grupo
-        const groupAdmins = participants.filter(p => p.admin);
+  let inviteCode = link.trim().split('/').pop();
 
-        // Verificar si el bot es admin
-        if (!groupAdmins.find(p => p.id === botNumber)?.admin) {
-            return m.reply('❌ El bot necesita ser administrador para usar esta función');
-        }
+  try {
+    let groupId = await conn.groupAcceptInvite(inviteCode);
+    await conn.sendMessage(groupId + '@g.us', { text: mensaje });
+    m.reply('✅ El bot se unió al grupo y envió el mensaje con éxito.');
+  } catch (e) {
+    console.error(e);
+    m.reply('❌ Ocurrió un error al unirse o enviar el mensaje. Verifica el enlace o si el grupo está lleno.');
+  }
+};
 
-        // Monitorear cambios de admin
-        conn.on('group-participants-update', async (update) => {
-            if (update.action === 'demote') {
-                const revokedAdmin = update.participants[0];
-                const revokingAdmin = update.actor;
-
-                try {
-                    // Restaurar admin al revocado
-                    await conn.groupParticipantsUpdate(groupId, [revokedAdmin], "promote");
-
-                    // Quitar admin al que revocó
-                    await conn.groupParticipantsUpdate(groupId, [revokingAdmin], "demote");
-
-                    await conn.sendMessage(groupId, {
-                        text: `🛡️ Sistema de Protección Activado\n\n` +
-                              `✅ Admin restaurado: @${revokedAdmin.split('@')[0]}\n` +
-                              `❌ Admin removido: @${revokingAdmin.split('@')[0]}`,
-                        mentions: [revokedAdmin, revokingAdmin]
-                    });
-
-                } catch (error) {
-                    console.error('Error al gestionar cambios de admin:', error);
-                    await conn.sendMessage(groupId, {
-                        text: '❌ Error al procesar cambios de administrador'
-                    });
-                }
-            }
-        });
-
-    } catch (error) {
-        console.error('Error en plugin de protección:', error);
-        m.reply('❌ Ocurrió un error al ejecutar el plugin');
-    }
-}
-
-// Configuración del comando
-handler.help = ['adminprotect'];
-handler.tags = ['group', 'admin'];
-handler.command = /^(adminprotect|protectadmin)$/i;
-handler.group = true;
-handler.admin = true;
-handler.botAdmin = true;
+handler.help = ['joingrp <enlace> | <mensaje>'];
+handler.tags = ['group', 'owner'];
+handler.command = ['joingrp', 'joinlink']; 
+handler.owner = true; 
 
 module.exports = handler;
