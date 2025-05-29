@@ -1,27 +1,28 @@
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  if (!text) return m.reply(`✳️ Uso correcto:\n${usedPrefix + command} <enlace_del_grupo> | <mensaje>\n\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/ABCDEFGHIJKLMNO | Hola grupo!`);
+const handler = async (m, { conn, text, command, usedPrefix }) => {
+  const [link, ...mensajePartes] = text.split("|");
+  const mensaje = mensajePartes.join("|").trim();
 
-  let [link, ...mensajePartes] = text.split("|");
-  let mensaje = mensajePartes.join("|").trim();
+  if (!link || !mensaje)
+    throw `✳️ Uso correcto:\n${usedPrefix + command} <enlace_del_grupo> | <mensaje>\n\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/ABCDEFGHIJKLMNO | Hola grupo!`;
 
-  if (!link.includes('chat.whatsapp.com')) return m.reply('❌ El enlace proporcionado no es válido.');
-  if (!mensaje) return m.reply('❌ Debes proporcionar un mensaje para enviar al grupo.');
+  if (!link.includes('chat.whatsapp.com'))
+    throw '❌ El enlace proporcionado no es válido.';
 
-  let inviteCode = link.trim().split('/').pop();
+  const inviteCode = link.trim().split('/').pop();
 
   try {
-    let groupId = await conn.groupAcceptInvite(inviteCode);
+    const groupId = await conn.groupAcceptInvite(inviteCode);
     await conn.sendMessage(groupId + '@g.us', { text: mensaje });
-    m.reply('✅ El bot se unió al grupo y envió el mensaje con éxito.');
-  } catch (e) {
-    console.error(e);
-    m.reply('❌ Ocurrió un error al unirse o enviar el mensaje. Verifica el enlace o si el grupo está lleno.');
+    m.reply(`✅ El bot se unió al grupo y envió el mensaje con éxito.`);
+  } catch (error) {
+    console.error(error);
+    m.reply('❌ Error al unirse o enviar mensaje. Asegúrate de que el grupo no esté lleno o el enlace no esté vencido.');
   }
 };
 
 handler.help = ['joingrp <enlace> | <mensaje>'];
-handler.tags = ['group', 'owner'];
-handler.command = ['joingrp', 'joinlink']; 
-handler.owner = true; 
+handler.tags = ['owner'];
+handler.command = ['joingrp', 'joinlink']; // Puedes agregar más aliases si deseas
+handler.owner = true;
 
-module.exports = handler;
+export default handler;
