@@ -148,7 +148,17 @@ if (!bot.jadibotmd) return m.reply('*${emoji} Este Comando Se Encuentra Desactiv
         await sleep(5000);
         if (args[0]) return;
 
-        await parent.reply(conn.user.jid, `La siguiente vez que se conecte envía el siguiente mensaje para iniciar sesión sin utilizar otro código `, m);
+        await parent.reply(conn.user.jid, `╭───────────────⍰  
+│  ✭ 𝗞𝗜𝗥𝗜𝗧𝗢 - 𝗕𝗢𝗧 𝗠𝗗 ✰  
+╰───────────────⍰ 
+> ✰ 𝗥𝗲𝗰𝗼𝗻𝗲𝘅𝗶ó𝗻 𝗿á𝗽𝗶𝗱𝗮 𝗱𝗲 𝗦𝘂𝗯-𝗕𝗼𝘁 ✪  
+
+⟿ 𝐋𝐚 𝐩𝐫ó𝐱𝐢𝐦𝐚 𝐯𝐞𝐳 𝐪𝐮𝐞 𝐝𝐞𝐬𝐞𝐞𝐬 𝐫𝐞𝐜𝐨𝐧𝐞𝐜𝐭𝐚𝐫𝐭𝐞, 𝐬𝐢𝐦𝐩𝐥𝐞𝐦𝐞𝐧𝐭𝐞 𝐞𝐧𝐯í𝐚 𝐞𝐥 𝐬𝐢𝐠𝐮𝐢𝐞𝐧𝐭𝐞 𝐜𝐨𝐦𝐚𝐧𝐝𝐨:  
+
+➤ *#session*  
+
+📌 𝗡𝗼 𝗻𝗲𝗰𝗲𝘀𝗶𝘁𝗮𝗿á𝘀 𝘂𝗻 𝗻𝘂𝗲𝘃𝗼 𝗰ó𝗱𝗶𝗴𝗼 𝗮 𝗺𝗲𝗻𝗼𝘀 𝗾𝘂𝗲 𝗲𝗹𝗶𝗺𝗶𝗻𝗲𝘀 𝘁𝘂 𝘀𝗲𝘀𝗶𝗼́𝗻 𝗰𝗼𝗻 *#delsesion*.  
+`, m, rcanal);
         await parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync(`./CrowJadiBot/${authFolderB}/creds.json`), "utf-8").toString("base64") }, { quoted: m });
       }
     }
