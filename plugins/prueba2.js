@@ -86,13 +86,20 @@ if (!bot.jadibotmd) return m.reply('*${emoji} Este Comando Se Encuentra Desactiv
       setTimeout(async () => {
         let codeBot = await conn.requestPairingCode(cleanedNumber);
         codeBot = codeBot?.match(/.{1,4}/g)?.join("-") || codeBot;
-            let txt = `┌  🜲  *Usa este Código para convertirte en un Sub Bot*\n`
-            txt += `│  ❀  Pasos\n`
-            txt += `│  ❀  *1* : Haga click en los 3 puntos\n`
-            txt += `│  ❀  *2* : Toque dispositivos vinculados\n`
-            txt += `│  ❀  *3* : Selecciona *Vincular con el número de teléfono*\n` 
-            txt += `└  ❀  *4* : Escriba el Codigo\n\n`
-            txt += `*❖ Nota:* Este Código solo funciona en el número en el que se solicitó.`;
+            let txt = `╭───────────────⍰  
+│  ✭ 𝗞𝗜𝗥𝗜𝗧𝗢 - 𝗕𝗢𝗧 𝗠𝗗 ✰  
+╰───────────────⍰ 
+> ✰ 𝗖𝗼𝗻𝗲𝘅𝗶ó𝗻 𝗦𝘂𝗯-𝗕𝗼𝘁 (𝗠𝗼𝗱𝗼 𝗖ó𝗱𝗶𝗴𝗼) ✪  
+
+⟿ 𝐔𝐬𝐚 𝐞𝐬𝐭𝐞 𝐜𝐨́𝐝𝐢𝐠𝐨 𝐩𝐚𝐫𝐚 𝐜𝐨𝐧𝐯𝐞𝐫𝐭𝐢𝐫𝐭𝐞 𝐞𝐧 𝐮𝐧 *𝗦𝘂𝗯-𝗕𝗼𝘁 𝗧𝗲𝗺𝗽𝗼𝗿𝗮𝗹*.  
+
+➥ ❶ 𓂃 Toca los tres puntos en la esquina superior derecha.  
+➥ ❷ 𓂃 Ve a *"Dispositivos vinculados"*.  
+➥ ❸ 𓂃 Selecciona *Vincular con el número de teléfono*.  
+➥ ❹ 𓂃 Ingresa el código que se muestra a continuación.  
+
+⚠ 𝐄𝐬𝐭𝐞 𝐜ó𝐝𝐢𝐠𝐨 𝐬ó𝐥𝐨 𝐟𝐮𝐧𝐜𝐢𝐨𝐧𝐚 𝐞𝐧 𝐞𝐥 𝐧ú𝐦𝐞𝐫𝐨 𝐝𝐞𝐬𝐝𝐞 𝐞𝐥 𝐪𝐮𝐞 𝐬𝐞 𝐬𝐨𝐥𝐢𝐜𝐢𝐭ó.  
+⚠ 𝐒𝐢 𝐲𝐚 𝐭𝐢𝐞𝐧𝐞𝐬 𝐮𝐧𝐚 𝐬𝐞𝐬𝐢ó𝐧 𝐯𝐢𝐧𝐜𝐮𝐥𝐚𝐝𝐚, 𝐬𝐞 𝐫𝐞𝐜𝐨𝐦𝐢𝐞𝐧𝐝𝐚 𝐝𝐞𝐬𝐜𝐨𝐧𝐞𝐜𝐭𝐚𝐫𝐥𝐚 𝐩𝐚𝐫𝐚 𝐞𝐯𝐢𝐭𝐚𝐫 𝐞𝐫𝐫𝐨𝐫𝐞𝐬 𝐨 𝐬𝐮𝐬𝐩𝐞𝐧𝐬𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽.`;
         await parent.reply(m.chat, txt, m, rcanal);
         await parent.reply(m.chat, codeBot, m, rcanal);
         rl.close();
