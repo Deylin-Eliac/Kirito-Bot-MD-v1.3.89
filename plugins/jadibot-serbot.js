@@ -64,7 +64,7 @@ let rtx2 = `╭───────────────⍰
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const yukiJBOptions = {}
+const kiritoJBOptions = {}
 if (global.conns instanceof Array) console.log()
 else global.conns = []
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
@@ -81,18 +81,18 @@ return m.reply(`${emoji2} No se han encontrado espacios para *Sub-Bots* disponib
 }*/
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let id = `${who.split`@`[0]}`  //conn.getName(who)
-let pathYukiJadiBot = path.join(`./${jadi}/`, id)
-if (!fs.existsSync(pathYukiJadiBot)){
-fs.mkdirSync(pathYukiJadiBot, { recursive: true })
+let pathkiritoJadiBot = path.join(`./${jadi}/`, id)
+if (!fs.existsSync(pathkiritoJadiBot)){
+fs.mkdirSync(pathkiritoJadiBot, { recursive: true })
 }
-yukiJBOptions.pathYukiJadiBot = pathYukiJadiBot
-yukiJBOptions.m = m
-yukiJBOptions.conn = conn
-yukiJBOptions.args = args
-yukiJBOptions.usedPrefix = usedPrefix
-yukiJBOptions.command = command
-yukiJBOptions.fromCommand = true
-yukiJadiBot(yukiJBOptions)
+kiritoJBOptions.pathkiritoJadiBot = pathkiritoJadiBot
+kiritoJBOptions.m = m
+kiritoJBOptions.conn = conn
+kiritoJBOptions.args = args
+kiritoJBOptions.usedPrefix = usedPrefix
+kiritoJBOptions.command = command
+kiritoJBOptions.fromCommand = true
+kiritoJadiBot(kiritoJBOptions)
 global.db.data.users[m.sender].Subs = new Date * 1
 } 
 handler.help = ['qr', 'code']
@@ -100,8 +100,8 @@ handler.tags = ['serbot']
 handler.command = ['qr', 'code']
 export default handler 
 
-export async function yukiJadiBot(options) {
-let { pathYukiJadiBot, m, conn, args, usedPrefix, command } = options
+export async function kiritoJadiBot(options) {
+let { pathkiritoJadiBot, m, conn, args, usedPrefix, command } = options
 if (command === 'code') {
 command = 'qr'; 
 args.unshift('code')}
@@ -112,9 +112,9 @@ args[0] = args[0].replace(/^--code$|^code$/, "").trim()
 if (args[1]) args[1] = args[1].replace(/^--code$|^code$/, "").trim()
 if (args[0] == "") args[0] = undefined
 }
-const pathCreds = path.join(pathYukiJadiBot, "creds.json")
-if (!fs.existsSync(pathYukiJadiBot)){
-fs.mkdirSync(pathYukiJadiBot, { recursive: true })}
+const pathCreds = path.join(pathkiritoJadiBot, "creds.json")
+if (!fs.existsSync(pathkiritoJadiBot)){
+fs.mkdirSync(pathkiritoJadiBot, { recursive: true })}
 try {
 args[0] && args[0] != undefined ? fs.writeFileSync(pathCreds, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
 } catch {
@@ -129,7 +129,7 @@ const drmer = Buffer.from(drm1 + drm2, `base64`)
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const msgRetry = (MessageRetryMap) => { }
 const msgRetryCache = new NodeCache()
-const { state, saveState, saveCreds } = await useMultiFileAuthState(pathYukiJadiBot)
+const { state, saveState, saveCreds } = await useMultiFileAuthState(pathkiritoJadiBot)
 
 const connectionOptions = {
 logger: pino({ level: "fatal" }),
