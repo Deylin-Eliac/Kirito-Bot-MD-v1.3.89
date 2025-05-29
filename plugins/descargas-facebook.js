@@ -40,7 +40,7 @@ const handler = async (m, { text, conn, args }) => {
   } catch (e) {
     
     await m.react(error);  
-    return conn.reply(m.chat, `${msm} Error al enviar el video.`, m)
+    return conn.reply(m.chat, `${msm} Error al enviar el video.`, m, rcanal)
   }
 }
 
