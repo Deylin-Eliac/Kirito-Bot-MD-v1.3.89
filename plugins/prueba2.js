@@ -1,63 +1,80 @@
-import axios from 'axios';
-import cheerio from 'cheerio';
-import FormData from 'form-data';
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, generateWAMessageFromContent, proto } from '@whiskeysockets/baileys';
+import { exec } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
-const effects = {
-  narutotext: 'https://en.ephoto360.com/naruto-shippuden-logo-style-text-effect-online-808.html',
-  glitchtext: 'https://en.ephoto360.com/create-pixel-glitch-text-effect-online-769.html',
-  neonlight: 'https://en.ephoto360.com/neon-light-text-effect-online-882.html',
-  // Agrega más efectos si quieres
-};
+let handler = async (m, { conn, text, command }) => {
+  try {
+    const sessionPath = `./subbots/${m.sender.replace(/[^0-9]/g, '')}`;
+    if (!fs.existsSync(sessionPath)) fs.mkdirSync(sessionPath, { recursive: true });
 
-async function generarLogo(tipo = 'narutotext', texto = 'Kirito-Bot') {
-  const url = effects[tipo.toLowerCase()];
-  if (!url) throw `Efecto "${tipo}" no válido. Prueba: narutotext, glitchtext, neonlight.`;
+    const { state, saveCreds } = await useMultiFileAuthState(sessionPath);
 
-  const res = await axios.get(url, {
-    headers: { 'User-Agent': 'Mozilla/5.0' }
-  });
-
-  const $ = cheerio.load(res.data);
-  const token = $('input[name=token]').val();
-  const build_server = $('input[name=build_server]').val();
-  const build_server_id = $('input[name=build_server_id]').val();
-
-  const form = new FormData();
-  form.append('text[]', texto);
-  form.append('token', token);
-  form.append('build_server', build_server);
-  form.append('build_server_id', build_server_id);
-
-  const generar = await axios.post(
-    'https://en.ephoto360.com/effect/create-image',
-    form,
-    {
-      headers: {
-        ...form.getHeaders(),
-        'User-Agent': 'Mozilla/5.0',
-        'Cookie': res.headers['set-cookie']?.join('; ') || ''
+    const sock = makeWASocket({
+      auth: state,
+      printQRInTerminal: false,
+      browser: ['Kirito-SubBot', 'Chrome', '1.0.0'],
+      markOnlineOnConnect: false,
+      generateHighQualityLinkPreview: true,
+      getMessage: async (key) => {
+        return {
+          conversation: "SubBot conectado",
+        };
       }
+    });
+
+    m.reply('🟡 Esperando conexión del Sub-Bot...');
+
+    // Muestra QR
+    sock.ev.on('connection.update', async (update) => {
+      const { connection, lastDisconnect, qr } = update;
+
+      if (qr) {
+        await conn.sendMessage(m.chat, { text: '*📲 Escanea este código QR desde otro WhatsApp:*' }, { quoted: m });
+        await conn.sendMessage(m.chat, { image: Buffer.from(qr), caption: '⌛ Expira en 60 segundos' }, { quoted: m });
+      }
+
+      if (connection === 'open') {
+        await conn.sendMessage(m.chat, { text: '✅ Sub-Bot vinculado exitosamente y conectado.', mentions: [m.sender] }, { quoted: m });
+      }
+
+      if (connection === 'close') {
+        const code = lastDisconnect?.error?.output?.statusCode;
+        const reason = DisconnectReason[code] || lastDisconnect?.error?.message;
+        await conn.sendMessage(m.chat, { text: `❌ Sub-Bot desconectado: ${reason}` }, { quoted: m });
+        try {
+          await sock.logout();
+        } catch {}
+      }
+    });
+
+    // Código de emparejamiento (opcional)
+    try {
+      const code = await sock.requestPairingCode(m.sender.split('@')[0]);
+      await conn.sendMessage(m.chat, { text: `🔗 *Código de vinculación generado:*\n\`\`\`${code}\`\`\`` }, { quoted: m });
+    } catch (err) {
+      console.error('No se pudo generar el código de vinculación:', err.message);
     }
-  );
 
-  const imageUrl = generar.data?.image;
-  return build_server + imageUrl;
-}
+    // Guardar sesión en cada cambio
+    sock.ev.on('creds.update', saveCreds);
 
-let handler = async (m, { text, args, conn, usedPrefix, command }) => {
-  if (args.length < 2) {
-    throw `Uso incorrecto.\nEjemplo: ${usedPrefix + command} narutotext TuNombre`;
+    // Lógica del sub-bot
+    sock.ev.on('messages.upsert', async ({ messages }) => {
+      const msg = messages[0];
+      if (!msg.message || msg.key.fromMe) return;
+      const text = msg.message.conversation || msg.message.extendedTextMessage?.text || '';
+
+      if (/hola|hello|hi/i.test(text)) {
+        await sock.sendMessage(msg.key.remoteJid, { text: '👋 ¡Hola! Soy un Sub-Bot temporal.' });
+      }
+    });
+
+  } catch (err) {
+    console.error('Error en comando serbot:', err);
+    await conn.sendMessage(m.chat, { text: `❌ Ocurrió un error al iniciar el Sub-Bot:\n\`\`\`${err.message}\`\`\`` }, { quoted: m });
   }
-
-  const tipo = args[0];
-  const texto = args.slice(1).join(' ');
-  const url = await generarLogo(tipo, texto);
-
-  await conn.sendMessage(m.chat, { image: { url }, caption: `Logo generado con efecto: ${tipo}` }, { quoted: m });
 };
 
-handler.help = ['ephoto <efecto> <texto>'];
-handler.tags = ['logo'];
-handler.command = ['ephoto', 'logo'];
-
+handler.command = ['codex'];
 export default handler;
