@@ -49,7 +49,7 @@ let rtx2 = `╭───────────────⍰
 `;
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const hoshinoJBOptions = {}
+const kiritoJBOptions = {}
 if (global.conns instanceof Array) console.log()
 else global.conns = []
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
@@ -77,7 +77,7 @@ kiritoJBOptions.args = args
 kiritoJBOptions.usedPrefix = usedPrefix
 kiritoJBOptions.command = command
 kiritoJBOptions.fromCommand = true
-kiritoJadiBot(hoshinoJBOptions)
+kiritoJadiBot(kiritoJBOptions)
 global.db.data.users[m.sender].Subs = new Date * 1
 } 
 handler.help = ['qr', 'code']
