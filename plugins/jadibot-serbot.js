@@ -54,7 +54,7 @@ global.db.data.users[m.sender].Subs = new Date * 1
 } 
 handler.help = ['qr', 'code']
 handler.tags = ['serbot']
-handler.command = ['qy', 'cod']
+handler.command = ['qr', 'code']
 export default handler 
 
 export async function hoshinoJadiBot(options) {
