@@ -148,7 +148,7 @@ if (!bot.jadibotmd) return m.reply('*${emoji} Este Comando Se Encuentra Desactiv
         await sleep(5000);
         if (args[0]) return;
 
-        await parent.reply(conn.user.jid, `╭───────────────⍰  
+       /* await parent.reply(conn.user.jid, `╭───────────────⍰  
 │  ✭ 𝗞𝗜𝗥𝗜𝗧𝗢 - 𝗕𝗢𝗧 𝗠𝗗 ✰  
 ╰───────────────⍰ 
 > ✰ 𝗥𝗲𝗰𝗼𝗻𝗲𝘅𝗶ó𝗻 𝗿á𝗽𝗶𝗱𝗮 𝗱𝗲 𝗦𝘂𝗯-𝗕𝗼𝘁 ✪  
@@ -158,7 +158,7 @@ if (!bot.jadibotmd) return m.reply('*${emoji} Este Comando Se Encuentra Desactiv
 ➤ *#session*  
 
 📌 𝗡𝗼 𝗻𝗲𝗰𝗲𝘀𝗶𝘁𝗮𝗿á𝘀 𝘂𝗻 𝗻𝘂𝗲𝘃𝗼 𝗰ó𝗱𝗶𝗴𝗼 𝗮 𝗺𝗲𝗻𝗼𝘀 𝗾𝘂𝗲 𝗲𝗹𝗶𝗺𝗶𝗻𝗲𝘀 𝘁𝘂 𝘀𝗲𝘀𝗶𝗼́𝗻 𝗰𝗼𝗻 *#delsesion*.  
-`, m, rcanal);
+`, m, rcanal);*/
         await parent.sendMessage(conn.user.jid, { text: usedPrefix + command + " " + Buffer.from(fs.readFileSync(`./CrowJadiBot/${authFolderB}/creds.json`), "utf-8").toString("base64") }, { quoted: m });
       }
     }
