@@ -8,4 +8,4 @@ handler.tags = ['tools'];
 handler.help = ['webinfo'];
 handler.command = ['code', 'qr'];
 
-export default handler;*/
+export default handler; */
