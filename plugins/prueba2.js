@@ -130,7 +130,7 @@ if (!bot.jadibotmd) return m.reply('*${emoji} Este Comando Se Encuentra Desactiv
       if (connection == 'open') {
         conn.isInit = true;
         global.conns.push(conn);
-        await parent.reply(m.chat, args[0] ? `╭───────────────⍰  
+        await parent.reply(m.chat, args[0] ? ' conectado con éxito' : `╭───────────────⍰  
 │  ✭ 𝗞𝗜𝗥𝗜𝗧𝗢 - 𝗕𝗢𝗧 𝗠𝗗 ✰  
 ╰───────────────⍰ 
 > ✰ 𝗖𝗼𝗻𝗲𝘅𝗶𝗼́𝗻 𝗰𝗼𝗺𝗽𝗹𝗲𝘁𝗮𝗱𝗮 𝗰𝗼𝗻 𝗲́𝘅𝗶𝘁𝗼 ✪  
