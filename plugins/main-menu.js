@@ -81,7 +81,7 @@ Hola *@${userId.split('@')[0]}*, soy *𝐊𝐢𝐫𝐢𝐭𝐨-𝐁𝐨𝐭 𝐌
 ${Object.keys(tags).map(tag => {
   const commandsForTag = help.filter(menu => menu.tags.includes(tag));
   if (commandsForTag.length === 0) return '';
-  return `╔─┤ ${tags[tag].toUpperCase()} ├─╗
+  return `*╔─┤ ${tags[tag].toUpperCase()} ├─╗*
 ${commandsForTag.map(menu =>
   menu.help.map(help =>
     `║ → ${_p}${help} ${menu.limit ? '★' : ' '} ${menu.premium ? '🛡' : ' '}`
