@@ -5,9 +5,9 @@ let handler = async (m, { conn }) => {
 
     const staff = [
         { number: '50433191934', name: 'Deylin 👑', role: 'Creador' },
-        { number: '573154062343', name: 'https', role: 'Desarrollador' },
-       // { number: '50487654321', name: 'Ana Codes', role: 'Programadora' },
-        //{ number: '50411223344', name: 'Carlos Designer', role: 'Diseñador' },
+        { number: '573154062343', name: 'https', role: 'Colaborador' },
+        { number: '584123989549', name: 'Anuar', role: 'Colaborador' },
+        { number: '584146277368', name: 'Barboza', role: 'Colaborador' },
     ];
 
     let mensaje = `╭━━〔 *🌟 EQUIPO OFICIAL* 〕━━⬣\n`;
