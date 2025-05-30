@@ -85,11 +85,8 @@ ${Object.keys(tags).map(tag => {
 ${commandsForTag.map(menu => 
   menu.help.map(help => 
     `║ → ${_p}${help} ${menu.limit ? '★' : ' '} ${menu.premium ? '🛡' : ' '}`
-  ).join('\n')
-).join('\n')}
-╚═════════════════════╝`;
+  ).join('\n')`;
 }).filter(text => text !== '').join('\n')}
-
 ══════════════════════════
 Powered by Deylin 
 ══════════════════════════
