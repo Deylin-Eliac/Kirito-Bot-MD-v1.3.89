@@ -1,36 +1,34 @@
-const handler = async (m, { conn, text, command, usedPrefix }) => {
-  const [link, ...mensajePartes] = text.split("|");
-  const mensaje = mensajePartes.join("|").trim();
+let handler = async function (m, { conn, participants, groupMetadata }) {
+  // Función para normalizar los JIDs (eliminar caracteres no numéricos)
+  const normalizeJid = jid => jid?.replace(/[^0-9]/g, '')
 
-  if (!link || !mensaje)
-    throw `✳️ Uso correcto:\n${usedPrefix + command} <enlace_del_grupo> | <mensaje>\n\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/ABCDEFGHIJKLMNO | Hola grupo!`;
+  // Número del remitente (quien envió el mensaje)
+  const senderNum = normalizeJid(m.sender)
 
-  if (!link.includes('chat.whatsapp.com'))
-    throw '❌ El enlace proporcionado no es válido.';
+  // Lista de números del bot: principal (jid) y secundario (lid)
+  const botNums = [conn.user.jid, conn.user.lid].map(normalizeJid)
 
-  const inviteCode = link.trim().split('/').pop();
+  // Participantes del grupo (si es que el mensaje vino de un grupo)
+  const participantList = m.isGroup ? groupMetadata.participants : []
 
-  try {
-    const groupId = await conn.groupAcceptInvite(inviteCode);
-    await conn.sendMessage(groupId + '@g.us', { text: mensaje });
-    m.reply(`✅ El bot se unió al grupo y envió el mensaje con éxito.`);
-  } catch (error) {
-    console.error("Error al unirse o enviar mensaje:", error);
-    let errMsg = '❌ Error al unirse o enviar mensaje.';
-    if (error?.message?.includes('already')) {
-      errMsg += '\n📌 El bot ya está en el grupo.';
-    } else if (error?.message?.includes('not-authorized')) {
-      errMsg += '\n📌 El grupo está lleno o el enlace fue revocado.';
-    } else if (error?.message?.includes('invite code invalid')) {
-      errMsg += '\n📌 El código de invitación es inválido.';
-    }
-    m.reply(errMsg);
-  }
-};
+  // Usuario que envió el mensaje
+  const user = m.isGroup
+    ? participantList.find(u => normalizeJid(u.id) === senderNum)
+    : {}
 
-handler.help = ['joingrp <enlace> | <mensaje>'];
-handler.tags = ['owner'];
-handler.command = ['joingrp', 'joinlink'];
-handler.owner = true;
+  // Información del bot en el grupo (si está en los participantes)
+  const bot = m.isGroup
+    ? participantList.find(u => botNums.includes(normalizeJid(u.id)))
+    : {}
 
-export default handler;
+  // Aquí puedes hacer lo que desees con los datos, por ejemplo, enviarlos
+  return m.reply(`Participantes: ${participantList.length}\nUsuario: ${user?.id || 'N/A'}\nBot: ${bot?.id || 'N/A'}`)
+}
+
+handler.command = ['lid']
+handler.help = ['lid']
+handler.tags = ['lid']
+handler.group = true
+handler.rowner = true
+
+export default handler
