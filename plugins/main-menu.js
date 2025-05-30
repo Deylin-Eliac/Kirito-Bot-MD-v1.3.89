@@ -91,7 +91,6 @@ ${commandsForTag.map(menu =>
 ╰────────────────────────
 }).filter(Boolean).join('\n')}
 
-menuText +`
 ╭────────────────────────
 │  © Powered by Deylin
 ╰────────────────────────
