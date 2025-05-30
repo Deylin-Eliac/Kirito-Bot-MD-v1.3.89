@@ -36,11 +36,7 @@ const handler = async (m, { text, conn, args }) => {
 ╭──────⚔──────╮  
 ${emoji} 𝑲𝑰𝑹𝑰𝑻𝑶-𝑩𝑶𝑻 𝑴𝑫   
 ╰──────⚔──────╯
-🎬 *Título:* ${data.title || 'Sin título'}
-🧑‍💼 *Creador:* ${data.uploader || 'Desconocido'}
-👁‍🗨 *Vistas:* ${data.views || 'No disponible'}
-👍 *Likes:* ${data.likes || 'No disponible'}
-📹 *Resolución:* ${data.resolution || 'Desconocida'}
+📹 *Resolución:* ${data.resolution}
 🔗 *Enlace:* ${args[0]}
 
 ⟢ Aquí tienes: *˙Ⱉ˙ฅ*
