@@ -76,7 +76,7 @@ Hola @${userId.split('@')[0]}, bienvenido al panel de comandos.
 │ Total de comandos: ${totalCommands}
 ╰─────────────────────────────
 
-╭─〔 LISTA DE COMANDOS 〕`;
+╭─〔 LISTA DE COMANDOS 〕
 
 menuText += `\n${Object.keys(tags).map(tag => {
   const commandsForTag = help.filter(menu => menu.tags.includes(tag));
@@ -88,13 +88,13 @@ ${commandsForTag.map(menu =>
     `│ ⤷ ${_p}${help}${menu.limit ? ' [limitado]' : ''}${menu.premium ? ' [premium]' : ''}`
   ).join('\n')
 ).join('\n')}
-╰────────────────────────`;
-}).filter(Boolean).join('\n')}`;
+╰────────────────────────
+}).filter(Boolean).join('\n')}
 
 menuText +`
 ╭────────────────────────
 │  © Powered by Deylin
-╰────────────────────────`;
+╰────────────────────────
 `;
 
     // no tocar 
