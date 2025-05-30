@@ -69,7 +69,7 @@ Hola *@${userId.split('@')[0]}*, soy *𝐊𝐢𝐫𝐢𝐭𝐨-𝐁𝐨𝐭 𝐌
 
 ╔═ [ INFORMACIÓN DEL SISTEMA ] ═╗
 ║ Cliente:          @${userId.split('@')[0]}
-║ Bot:              ${(conn.user.jid == global.conn.user.jid ? 'Principal Ⓥ' : 'Sub Bot Ⓢ')}
+║ Bot:              ${(conn.user.jid === global.conn.user.jid ? 'Principal Ⓥ' : 'Sub Bot Ⓢ')}
 ║ Modo:             ${mode}
 ║ Usuarios registrados: ${totalreg}
 ║ Tiempo activo:    ${uptime}
@@ -82,11 +82,13 @@ ${Object.keys(tags).map(tag => {
   const commandsForTag = help.filter(menu => menu.tags.includes(tag));
   if (commandsForTag.length === 0) return '';
   return `╔─┤ ${tags[tag].toUpperCase()} ├─╗
-${commandsForTag.map(menu => 
-  menu.help.map(help => 
+${commandsForTag.map(menu =>
+  menu.help.map(help =>
     `║ → ${_p}${help} ${menu.limit ? '★' : ' '} ${menu.premium ? '🛡' : ' '}`
-  ).join('\n')`;
+  ).join('\n')
+).join('\n')}`;
 }).filter(text => text !== '').join('\n')}
+
 ══════════════════════════
 Powered by Deylin 
 ══════════════════════════
