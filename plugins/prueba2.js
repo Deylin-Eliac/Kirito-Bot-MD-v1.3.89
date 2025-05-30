@@ -28,7 +28,5 @@ let handler = async function (m, { conn, participants, groupMetadata }) {
 handler.command = ['lid']
 handler.help = ['lid']
 handler.tags = ['lid']
-handler.group = true
-handler.rowner = true
 
 export default handler
