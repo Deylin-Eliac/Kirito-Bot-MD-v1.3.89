@@ -79,7 +79,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const thumb = (await conn.getFile(thumbnail))?.data;
 
     const infoMessage = ` 🫆 
-    \`Kirito-Bot - Descargas\`
+            \`Kirito-Bot - Descargas\`
 *✦ Título:* ${title}
 > ◆ ▬▬▬▬▬▬ ❴✪❵ ▬▬▬▬▬▬ ◆
 *✰ Duración:* ${timestamp}
