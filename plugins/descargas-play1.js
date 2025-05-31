@@ -79,7 +79,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const thumb = (await conn.getFile(thumbnail))?.data;
 
     const infoMessage = ` 🫆 
-\`Kirito-Bot - Descargas\`
+    \`Kirito-Bot - Descargas\`
 *✦ Título:* ${title}
 > ◆ ▬▬▬▬▬▬ ❴✪❵ ▬▬▬▬▬▬ ◆
 *✰ Duración:* ${timestamp}
@@ -95,8 +95,8 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const JT = {
       contextInfo: {
         externalAdReply: {
-          title: "Kirito-Bot MD 👑",
-          body: "(1) Delos mejores Bots de WhatsApp",
+          title: "𝐊𝐢𝐫𝐢𝐭𝐨 ☆ 𝐁𝐨𝐭 𝐌𝐃 ฅ՞•ﻌ•՞ฅ",
+          body: "𝑬𝒍 𝒎𝒆𝒋𝒐𝒓 𝑩𝒐𝒕 𝒅𝒆 𝑾𝒉𝒂𝒕𝒔𝑨𝒑𝒑",
           mediaType: 1,
           previewType: 0,
           mediaUrl: url,
