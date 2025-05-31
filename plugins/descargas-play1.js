@@ -61,9 +61,10 @@ const ddownr = {
     }
   }
 };
-        await m.react('🌟')
+        
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
+    await m.react('🌟')
   try {
     if (!text.trim()) {
       return conn.reply(m.chat, "⚔️ *Kirito-Bot* | Ingresa el nombre de la canción que deseas buscar.", m, rcanal);
