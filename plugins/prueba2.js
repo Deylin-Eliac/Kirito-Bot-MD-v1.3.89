@@ -1,22 +1,20 @@
 let handler = async function (m, { conn, participants, groupMetadata }) {
-   
+  if (!m.isGroup) return m.reply('Este comando solo funciona en grupos.')
+
   const normalizeJid = jid => jid?.replace(/[^0-9]/g, '')
-  const senderNum = normalizeJid(m.sender)
-  const botNums = [conn.user.jid, conn.user.lid].map(normalizeJid)
-  const participantList = m.isGroup ? groupMetadata.participants : []
+  const participantList = groupMetadata.participants || []
 
-  const user = m.isGroup
-    ? participantList.find(u => normalizeJid(u.id) === senderNum)
-    : {}
-  const bot = m.isGroup
-    ? participantList.find(u => botNums.includes(normalizeJid(u.id)))
-    : {}
+  const result = participantList.map(participant => ({
+    id: participant.id,
+    lid: participant.lid || null, 
+    admin: participant.admin || null
+  }))
 
-  return m.reply(`Participantes: ${participantList.length}\nUsuario: ${user?.id || 'N/A'}\nBot: ${bot?.id || 'N/A'}`)
+  return m.reply(JSON.stringify(result, null, 2))
 }
 
 handler.command = ['lid']
 handler.help = ['lid']
-handler.tags = ['lid']
+handler.tags = ['group']
 
 export default handler
