@@ -40,7 +40,6 @@ let tags = {
 let handler = async (m, { conn, usedPrefix: _p }) => {
   try {
     let userId = m.sender;
-    let botname = conn.user.name || "Kirito-Bot";
     let mode = global.opts["self"] ? "Privado" : "Público";
     let totalCommands = Object.keys(global.plugins).length;
     let totalreg = Object.keys(global.db.data.users).length;
