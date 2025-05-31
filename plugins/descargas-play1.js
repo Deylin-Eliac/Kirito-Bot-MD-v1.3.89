@@ -61,6 +61,7 @@ const ddownr = {
     }
   }
 };
+    await m.react('🌟')
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
@@ -72,7 +73,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     if (!search.all.length) {
       return m.reply("⚠ No se encontraron resultados para tu búsqueda.");
     }
-    await m.react('🌟')
+    
     const videoInfo = search.all[0];
     const { title, thumbnail, timestamp, views, ago, url } = videoInfo;
     const vistas = formatViews(views);
@@ -106,7 +107,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         }
       }
     };
-    await m.react('⚡️')
+    
     await conn.reply(m.chat, infoMessage, fkontak, JT);
 
     if (["play", "yta", "ytmp3"].includes(command)) {
@@ -143,7 +144,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
           console.error(`⚠ Error con la fuente ${source}:`, e.message);
         }
       }
-
+    await m.react('⚡️')
       if (!success) {
         return m.reply("⛔ *Error:* No se encontró un enlace de descarga válido.");
       }
