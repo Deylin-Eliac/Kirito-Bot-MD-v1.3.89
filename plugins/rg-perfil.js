@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 const moneda = 'llamas'; 
-const dev = `${dev}`; 
+const creador = `dev`; 
 
 const loadMarriages = () => {
     if (fs.existsSync('./src/database/marry.json')) {
@@ -73,7 +73,7 @@ ${description}
                 mentionedJid: [userId],
                 externalAdReply: {
                     title: '✰ Perfil de Usuario ✰',
-                    body: dev,
+                    body: creador,
                     thumbnailUrl: perfil,
                     mediaType: 1,
                     showAdAttribution: true,
