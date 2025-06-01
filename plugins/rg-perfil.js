@@ -3,9 +3,6 @@ import PhoneNumber from 'awesome-phonenumber';
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const moneda = 'lls'; 
-const dev = 'kirito'; 
-
 const loadMarriages = () => {
     if (fs.existsSync('./src/database/marry.json')) {
         const data = JSON.parse(fs.readFileSync('./src/database/marry.json', 'utf-8'));
@@ -16,40 +13,34 @@ const loadMarriages = () => {
 };
 
 let handler = async (m, { conn, args }) => {
-    try {
-        loadMarriages();
+    loadMarriages();
 
-        let userId;
-        if (m.quoted?.sender) {
-            userId = m.quoted.sender;
-        } else if (m.mentionedJid?.[0]) {
-            userId = m.mentionedJid[0];
-        } else {
-            userId = m.sender;
-        }
+    let userId;
+    if (m.quoted && m.quoted.sender) {
+        userId = m.quoted.sender;
+    } else {
+        userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender;
+    }
 
-        let user = global.db.data.users?.[userId];
-        if (!user) {
-            return m.reply('⚠️ Este usuario no tiene datos aún.');
-        }
+    let user = global.db.data.users[userId];
 
-        let name = await conn.getName(userId);
-        let cumpleanos = user.birth || 'No especificado';
-        let genero = user.genre || 'No especificado';
-        let description = user.description || 'Sin descripción';
-        let exp = user.exp || 0;
-        let nivel = user.level || 0;
-        let role = user.role || 'Esclavo';
-        let llamas = user.llama || 0;
-        let bankllamas = user.bank || 0;
+    let name = conn.getName(userId);
+    let cumpleanos = user.birth || 'No especificado';
+    let genero = user.genre || 'No especificado';
+    let description = user.description || 'Sin Descripción';
+    let exp = user.exp || 0;
+    let nivel = user.level || 0;
+    let role = user.role || 'Esclavo';
+    let llamas = user.llama || 0;
+    let bankllamas = user.bank || 0;
 
-        let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://qu.ax/ESiZc.jpg');
+    let perfil = await conn.profilePictureUrl(userId, 'image').catch(_ => 'https://qu.ax/ESiZc.jpg');
 
-        let isMarried = userId in global.db.data.marriages;
-        let partnerId = isMarried ? global.db.data.marriages[userId] : null;
-        let partnerName = partnerId ? await conn.getName(partnerId) : 'Nadie';
+    let isMarried = userId in global.db.data.marriages;
+    let partner = isMarried ? global.db.data.marriages[userId] : null;
+    let partnerName = partner ? conn.getName(partner) : 'Nadie';
 
-        let profileText = `
+    let profileText = `
 「👑」 *Perfil* ✰@${userId.split('@')[0]}✰
 ${description}
 
@@ -65,31 +56,27 @@ ${description}
 ⛁ *llamas Cartera* » ${llamas.toLocaleString()} ${moneda}
 ⛃ *llamas Banco* » ${bankllamas.toLocaleString()} ${moneda}
 ✰ *Premium* » ${user.premium ? '✅' : '❌'}
-        `.trim();
+  `.trim();
 
-        await conn.sendMessage(m.chat, {
-            text: profileText,
-            contextInfo: {
-                mentionedJid: [userId],
-                externalAdReply: {
-                    title: '✰ Perfil de Usuario ✰',
-                    body: dev,
-                    thumbnailUrl: perfil,
-                    mediaType: 1,
-                    showAdAttribution: true,
-                    renderLargerThumbnail: true
-                }
+    await conn.sendMessage(m.chat, { 
+        text: profileText,
+        contextInfo: {
+            mentionedJid: [userId],
+            externalAdReply: {
+                title: '✰ Perfil de Usuario ✰',
+                body: dev,
+                thumbnailUrl: perfil,
+                mediaType: 1,
+                showAdAttribution: true,
+                renderLargerThumbnail: true
             }
-        }, { quoted: m });
-    } catch (e) {
-        console.error(e);
-        m.reply('❌ Ocurrió un error al generar el perfil.');
-    }
+        }
+    }, { quoted: m });
 };
 
-handler.help = ['profile', 'perfil'];
+handler.help = ['profile'];
 handler.tags = ['rg'];
-handler.command = /^(profile|perfil)$/i;
+handler.command = ['profile', 'perfil'];
 handler.register = true;
 handler.group = true;
 
