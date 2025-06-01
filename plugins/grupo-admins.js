@@ -10,7 +10,7 @@ const handler = async (m, {conn, participants, groupMetadata, args}) => {
 ╰━ ${listAdmin}
 
 ╭━• ${emoji} *𝐌𝐞𝐧𝐬𝐚𝐣𝐞:*
-┃  ${mensaje}
+┃ ${oi}
 ┃
 ╰━━━━━━━━━━━━━━━━━━━━⬣
 
