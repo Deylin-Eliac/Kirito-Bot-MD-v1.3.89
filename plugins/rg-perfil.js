@@ -3,7 +3,7 @@ import PhoneNumber from 'awesome-phonenumber';
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const moneda = 'lls'; 
+const moneda = 'llamas'; 
 const dev = `${dev}`; 
 
 const loadMarriages = () => {
