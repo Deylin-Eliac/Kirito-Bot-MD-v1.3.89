@@ -101,38 +101,6 @@ global.keysneoxr = keysneoxrrr[Math.floor(keysneoxrrr.length * Math.random())];
 global.lolkeysapi = ['kurumi']; // ['BrunoSobrino_2']
 global.itsrose = ['4b146102c4d500809da9d1ff'];
 
-global.APIs = {
-  ApiEmpire: 'https://api-brunosobrino.zipponodes.xyz',
-  xteam: 'https://api.xteam.xyz',
-  dzx: 'https://api.dhamzxploit.my.id',
-  lol: 'https://api.lolhuman.xyz',
-  neoxr: 'https://api.neoxr.my.id',
-  zenzapis: 'https://api.zahwazein.xyz',
-  akuari: 'https://api.akuari.my.id',
-  akuari2: 'https://apimu.my.id',
-  fgmods: 'https://api-fgmods.ddns.net',
-  botcahx: 'https://api.botcahx.biz.id',
-  ibeng: 'https://api.ibeng.tech/docs',
-  rose: 'https://api.itsrose.site',
-  popcat: 'https://api.popcat.xyz',
-  xcoders: 'https://api-xcoders.site',
-  vihangayt: 'https://vihangayt.me',
-  erdwpe: 'https://api.erdwpe.com',
-  xyroinee: 'https://api.xyroinee.xyz',
-  nekobot: 'https://nekobot.xyz'
-},
-global.APIKeys = {
-  'https://api.xteam.xyz': `${keysxteam}`,
-  'https://api.lolhuman.xyz': 'GataDios',
-  'https://api.neoxr.my.id': `${keysneoxr}`,
-  'https://api.zahwazein.xyz': `${keysxxx}`,
-  'https://api-fgmods.ddns.net': 'fg-dylux',
-  'https://api.botcahx.biz.id': 'Admin',
-  'https://api.ibeng.tech/docs': 'tamvan',
-  'https://api.itsrose.site': 'Rs-Zeltoria',
-  'https://api-xcoders.site': 'Frieren',
-  'https://api.xyroinee.xyz': 'uwgflzFEh6'
-};
 
 //*─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─⭒─ׄ─ׅ─ׄ─*
 
