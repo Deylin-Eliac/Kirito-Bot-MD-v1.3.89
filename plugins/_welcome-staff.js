@@ -33,8 +33,8 @@ export async function before(m, { conn, participants, groupMetadata }) {
   let fraseRandomBienvenida = frasesBienvenida[Math.floor(Math.random() * frasesBienvenida.length)];
   let fraseRandomDespedida = frasesDespedida[Math.floor(Math.random() * frasesDespedida.length)];
 
-  let imageUrlBienvenida = 'https://files.catbox.moe/yjyska.jpg'; 
-  let imageUrlDespedida = 'https://files.catbox.moe/sdblhp.jpg';
+  let imageUrlBienvenida = 'https://files.catbox.moe/hnif5j.jpg'; 
+  let imageUrlDespedida = 'https://files.catbox.moe/hnif5j.jpg';
 
 
   if (m.messageStubType === WAMessageStubType.GROUP_PARTICIPANT_ADD) {
