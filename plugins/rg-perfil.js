@@ -15,9 +15,7 @@ let handler = async (m, { conn, args }) => {
     let name = conn.getName(userId);
     let cumpleanos = user.birth || 'No especificado';
     let genero = user.genre || 'No especificado';
-        let isMarried = userId in global.db.data.marriages;
-    let partner = isMarried ? global.db.data.marriages[userId] : null;
-    let partnerName = partner ? conn.getName(partner) : 'Nadie';
+    let pareja = user.marry || 'Nadie';
     let description = user.description || 'Sin Descripción';
     let exp = user.exp || 0;
     let nivel = user.level || 0;
@@ -34,7 +32,7 @@ ${description}
 ✦ Edad » ${user.age || 'Desconocida'}
 ♛ *Cumpleaños* » ${cumpleanos}
 ⚥ *Género* » ${genero}
-♡ Casado con » ${isMarried ? partnerName : 'Nadie'}
+♡ *Casado con* » ${pareja}
 
 ☆ *Experiencia* » ${exp.toLocaleString()}
 ❖ *Nivel* » ${nivel}
