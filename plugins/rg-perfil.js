@@ -3,8 +3,8 @@ import PhoneNumber from 'awesome-phonenumber';
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-const moneda = 'lls'; // Defínelo como símbolo o nombre de tu moneda
-const dev = 'Desarrollado por Mode'; // Personaliza este texto
+const moneda = 'lls'; 
+const dev = `${dev}`; 
 
 const loadMarriages = () => {
     if (fs.existsSync('./src/database/marry.json')) {
