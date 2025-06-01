@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 const moneda = 'llamas'; 
-const creador = `dev`; 
+const creador = `${dev}`; 
 
 const loadMarriages = () => {
     if (fs.existsSync('./src/database/marry.json')) {
