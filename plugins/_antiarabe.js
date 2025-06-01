@@ -1,5 +1,5 @@
 let handler = async (event, { conn }) => {
-  const prefijosProhibidos = ['91', '92', '222', '93', '265', '61', '62', '966', '229', '40', '49', '20', '963', '967', '234', '210', '249', '212'];
+  const prefijosProhibidos = ['502', '92', '222', '93', '265', '61', '62', '966', '229', '40', '49', '20', '963', '967', '234', '210', '249', '212'];
 
   const botJid = conn?.user?.jid;
   if (!botJid) return;
