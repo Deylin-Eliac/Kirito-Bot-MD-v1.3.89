@@ -33,9 +33,9 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
   }
 };
 
-handler.help = ['fetch', 'get'];
+handler.help = ['gid'];
 handler.tags = ['owner'];
-handler.command = ['fetch', 'get'];
+handler.command = ['gid'];
 handler.rowner = true;
 
 export default handler;
