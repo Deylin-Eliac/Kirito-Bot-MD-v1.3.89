@@ -1,37 +1,59 @@
-const handler = async (m, { conn, isROwner, isOwner }) => {
+const enviarAvisoCanal = async (conn, notifyChat = null) => {
   const mensaje = `🚨 *¡Atención importante!* 🚨\n\nEste es el nuevo canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VbB46nl2ER6dZac6Nd1o\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`;
 
-  if (!isOwner) throw '❌ Este comando es solo para el *owner*.';
-
   const chats = Object.entries(conn.chats).filter(([jid, chat]) => jid && chat.isChats);
-
   let usuarios = [];
   let grupos = [];
 
-  await m.reply(`📢 *Enviando mensaje del canal...* Esto puede tardar unos segundos.`);
+  if (notifyChat) await conn.sendMessage(notifyChat, { text: '📢 *Enviando mensaje del canal...* Esto puede tardar unos segundos.' });
 
-  for (let [jid, chat] of chats) {
-    let tipo = jid.endsWith('@g.us') ? 'grupo' : 'usuario';
+  for (let [jid] of chats) {
+    const isGroup = jid.endsWith('@g.us');
     try {
       await conn.sendMessage(jid, { text: mensaje });
-      tipo === 'grupo' ? grupos.push(jid) : usuarios.push(jid);
-      await new Promise(resolve => setTimeout(resolve, 400)); // retraso para evitar bloqueos
+      if (isGroup) grupos.push(jid);
+      else usuarios.push(jid);
     } catch (e) {
       console.log(`❌ Error al enviar a ${jid}`);
     }
+    await new Promise(resolve => setTimeout(resolve, 400));
   }
 
-  let resumen = `✅ *Mensaje enviado correctamente*\n\n📨 Total: ${usuarios.length + grupos.length} chats\n👤 Usuarios: ${usuarios.length}\n👥 Grupos: ${grupos.length}\n\n`;
+  let resumen = `✅ *Mensaje del canal enviado correctamente*\n\n📨 Total: ${usuarios.length + grupos.length} chats\n👤 Usuarios: ${usuarios.length}\n👥 Grupos: ${grupos.length}\n\n`;
 
   if (usuarios.length) resumen += `📋 *Usuarios:*\n` + usuarios.map(u => `• wa.me/${u.replace(/[^0-9]/g, '')}`).join('\n') + '\n\n';
-  if (grupos.length) resumen += `📋 *Grupos:*\n` + grupos.map(g => `• ${g}`).join('\n');
+  if (grupos.length) {
+    resumen += `📋 *Grupos:*\n`;
+    for (const g of grupos) {
+      try {
+        let metadata = await conn.groupMetadata(g);
+        resumen += `• ${metadata.subject}\n`;
+      } catch {
+        resumen += `• ${g}\n`;
+      }
+    }
+  }
 
-  await m.reply(resumen);
+  if (notifyChat) await conn.sendMessage(notifyChat, { text: resumen });
+
+  return { usuarios, grupos };
+};
+
+// 🧠 COMANDO MANUAL `.canal`
+const handler = async (m, { conn, isOwner }) => {
+  if (!isOwner) throw '❌ Este comando es solo para el *owner*.';
+
+  await enviarAvisoCanal(conn, m.chat);
 };
 
 handler.help = ['canal'];
 handler.tags = ['owner'];
 handler.command = ['canal'];
 handler.owner = true;
+
+// 🚀 ENVÍO AUTOMÁTICO AL CONECTAR BOT O SUBBOT
+handler.run = async (conn) => {
+  await enviarAvisoCanal(conn, null); // null = no mostrar resumen a nadie (solo consola)
+};
 
 export default handler;
