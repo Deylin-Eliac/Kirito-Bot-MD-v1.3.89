@@ -14,7 +14,7 @@ let handler = async function (m, { conn, args, usedPrefix, command }) {
       metadata = await conn.groupMetadata(groupId)
 
       // Opcional: salir después
-      // await conn.groupLeave(groupId)
+      await conn.groupLeave(groupId)
 
     } else {
       // 👉 Uso local: obtener metadata manualmente
