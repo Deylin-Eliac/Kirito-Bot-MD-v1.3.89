@@ -6,7 +6,7 @@ const filePath = path.join(__dirname, 'mensaje_enviado.json');
 
 function cargarRegistro() {
   if (!fs.existsSync(filePath)) fs.writeFileSync(filePath, '{}');
-  return JSON.parse(fs.readFileSync(filePath));
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
 }
 
 function guardarRegistro(data) {
@@ -18,6 +18,11 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
     const registro = cargarRegistro();
     const idSubbot = sock.user?.id || sock.user?.jid;
 
+    if (!idSubbot) {
+      console.log('❌ No se pudo obtener el ID del subbot, el sock no está listo.');
+      return;
+    }
+
     if (!forzar && registro[idSubbot]) {
       console.log(`ℹ️ Ya se envió el mensaje desde ${idSubbot}, no se repetirá.`);
       return;
@@ -27,23 +32,42 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
       text: `🚨 *¡Atención importante!* 🚨\n\nEste es el nuevo canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VbB46nl2ER6dZac6Nd1o\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`,
     };
 
-    const grupos = await sock.groupFetchAllParticipating();
-    const idsGrupos = Object.keys(grupos);
-    const idsContactos = Object.keys(sock.chats).filter(id => id.endsWith('@s.whatsapp.net'));
-
-    for (const jid of idsGrupos) {
-      await sock.sendMessage(jid, mensaje);
-      await delay(1500);
+    // Obtener grupos
+    let idsGrupos = [];
+    try {
+      const grupos = await sock.groupFetchAllParticipating();
+      idsGrupos = Object.keys(grupos);
+      console.log(`ℹ️ Se encontraron ${idsGrupos.length} grupos.`);
+    } catch (e) {
+      console.warn('⚠️ No se pudieron obtener los grupos:', e.message);
     }
 
-    for (const jid of idsContactos) {
+    // Obtener chats individuales
+    const chats = await sock.getChats();
+    const idsContactos = chats
+      .filter(chat => chat.id.endsWith('@s.whatsapp.net'))
+      .map(chat => chat.id);
+
+    console.log(`ℹ️ Se encontraron ${idsContactos.length} chats individuales.`);
+
+    // Enviar a grupos
+    for (const jid of idsGrupos) {
+      console.log(`📨 Enviando mensaje al grupo: ${jid}`);
       await sock.sendMessage(jid, mensaje);
-      await delay(1500);
+      await delay(2000);
+    }
+
+    // Enviar a contactos individuales
+    for (const jid of idsContactos) {
+      console.log(`📨 Enviando mensaje al contacto: ${jid}`);
+      await sock.sendMessage(jid, mensaje);
+      await delay(2000);
     }
 
     if (!forzar) {
       registro[idSubbot] = true;
       guardarRegistro(registro);
+      console.log(`✅ Registro actualizado para el subbot ${idSubbot}.`);
     }
 
     console.log('✅ Mensaje del nuevo canal enviado con éxito.');
@@ -52,10 +76,10 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
   }
 }
 
-// Exportar para uso automático al iniciar
+// Exportar la función para uso externo
 module.exports.enviarMensajeNuevoCanal = enviarMensajeNuevoCanal;
 
-// Comando .canal para owner
+// Handler del comando .canal para owner
 const handler = async (m, { conn, isOwner }) => {
   if (!isOwner) return m.reply('❌ Solo el owner puede usar este comando.');
   await enviarMensajeNuevoCanal(conn, true); // forzar = true
