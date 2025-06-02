@@ -76,19 +76,17 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
   }
 }
 
-// Exportar la función para uso externo
-module.exports.enviarMensajeNuevoCanal = enviarMensajeNuevoCanal;
-
-// Handler del comando .canal para owner
-const handler = async (m, { conn, isOwner }) => {
+// Handler para el comando .canal
+async function handler(m, { conn, isOwner }) {
   if (!isOwner) return m.reply('❌ Solo el owner puede usar este comando.');
-  await enviarMensajeNuevoCanal(conn, true); // forzar = true
+  await enviarMensajeNuevoCanal(conn, true);
   m.reply('✅ Mensaje del canal reenviado manualmente a todos los chats.');
-};
+}
 
+// Exporta el handler y sus propiedades para que tu bot lo registre
 handler.help = ['canal'];
 handler.tags = ['owner'];
 handler.command = ['canal'];
 handler.owner = true;
 
-module.exports.default = handler;
+module.exports = handler;
