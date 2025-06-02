@@ -14,27 +14,27 @@ let handler = async function (m, { conn, args, groupMetadata, isGroup, usedPrefi
       metadata = await conn.groupMetadata(groupId)
 
       
-      await conn.groupLeave(groupId)
+      // await conn.groupLeave(groupId)
 
     } else {
       
       if (!isGroup) {
-        throw `⚠️ Este comando se debe usar dentro de un grupo o con un enlace válido.\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
+        throw `⚠️ Usa el comando dentro de un grupo o así:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
       }
       metadata = groupMetadata
     }
 
-    const participants = metadata?.participants || []
-    const result = participants.map(p => ({
-      id: p.id,
-      lid: p.lid || null,
-      admin: p.admin || null
+    const participantList = metadata?.participants || []
+    const result = participantList.map(participant => ({
+      id: participant.id,
+      lid: participant.lid || null,
+      admin: participant.admin || null
     }))
 
     await m.reply(JSON.stringify(result, null, 2))
   } catch (e) {
     console.error(e)
-    await m.reply('❌ Ocurrió un error al obtener los participantes del grupo.')
+    await m.reply('❌ No se pudieron obtener los participantes del grupo.')
   }
 }
 
