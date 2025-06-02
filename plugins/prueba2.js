@@ -19,20 +19,24 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
       agregado: new Date().toISOString()
     };
 
-    // Asegurar que la sección 'grupos' exista en la base de datos
+    // Asegurar que la sección 'grupos' exista
     global.db.data.grupos = global.db.data.grupos || {};
 
-    // Guardar usando el ID como clave
+    // Guardar en base de datos
     global.db.data.grupos[info.id] = grupoData;
-
-    // Guardar los cambios en disco si es necesario (algunos bots lo hacen automáticamente)
     if (typeof global.db.write === 'function') await global.db.write();
 
-    await m.reply(`✅ Información del grupo guardada en la base de datos.\n\n📛 *Nombre:* ${grupoData.nombre}\n🆔 *ID:* ${grupoData.id}`);
+    // Enviar mensaje al grupo
+    await conn.sendMessage(info.id, {
+      text: '✅ Bot corriendo en este grupo.'
+    });
+
+    // Confirmación al dueño que ejecuta el comando
+    await m.reply(`✅ Información del grupo guardada y mensaje enviado.\n\n📛 *Nombre:* ${grupoData.nombre}\n🆔 *ID:* ${grupoData.id}`);
 
   } catch (e) {
     console.error(e);
-    await m.reply('❌ No se pudo obtener o guardar la información del grupo. Verifica el enlace o los permisos del bot.');
+    await m.reply('❌ No se pudo obtener o enviar el mensaje al grupo. Verifica el enlace o los permisos del bot.');
   }
 };
 
