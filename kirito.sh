@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+//#!/data/data/com.termux/files/usr/bin/bash
 # Script automático para instalar kirito-Bot-MD en Termux
 
 REPO_URL="https://github.com/Deylin-Eliac/Kirito-Bot-MD"
