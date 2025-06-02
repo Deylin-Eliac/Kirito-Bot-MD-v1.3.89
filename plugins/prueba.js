@@ -47,10 +47,24 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
     }
 
     console.log('✅ Mensaje del nuevo canal enviado con éxito.');
-
   } catch (err) {
     console.error('❌ Error al enviar el mensaje del canal:', err);
   }
 }
 
-module.exports = { enviarMensajeNuevoCanal };
+// Exportar para uso automático al iniciar
+module.exports.enviarMensajeNuevoCanal = enviarMensajeNuevoCanal;
+
+// Comando .canal para owner
+const handler = async (m, { conn, isOwner }) => {
+  if (!isOwner) return m.reply('❌ Solo el owner puede usar este comando.');
+  await enviarMensajeNuevoCanal(conn, true); // forzar = true
+  m.reply('✅ Mensaje del canal reenviado manualmente a todos los chats.');
+};
+
+handler.help = ['canal'];
+handler.tags = ['owner'];
+handler.command = ['canal'];
+handler.owner = true;
+
+module.exports.default = handler;
