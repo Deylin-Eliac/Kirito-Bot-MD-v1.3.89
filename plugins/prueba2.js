@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 const handler = async (m, { conn, args, usedPrefix, command }) => {
   try {
     if (!args[0]) throw `⚠️ Usa el comando así:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`;
@@ -15,22 +12,27 @@ const handler = async (m, { conn, args, usedPrefix, command }) => {
     // Obtener info del grupo sin unirse
     const info = await conn.groupGetInviteInfo(code);
 
-    const data = {
+    const grupoData = {
       id: info.id,
       nombre: info.subject,
       descripcion: info.desc || 'Sin descripción',
+      agregado: new Date().toISOString()
     };
 
-    // Guardar archivo
-    const ruta = `./grupos_guardados/${info.id}.json`;
-    fs.mkdirSync('./grupos_guardados', { recursive: true });
-    fs.writeFileSync(ruta, JSON.stringify(data, null, 2));
+    // Asegurar que la sección 'grupos' exista en la base de datos
+    global.db.data.grupos = global.db.data.grupos || {};
 
-    await m.reply(`✅ Información del grupo guardada.\n\n📛 *Nombre:* ${data.nombre}\n🆔 *ID:* ${data.id}`);
+    // Guardar usando el ID como clave
+    global.db.data.grupos[info.id] = grupoData;
+
+    // Guardar los cambios en disco si es necesario (algunos bots lo hacen automáticamente)
+    if (typeof global.db.write === 'function') await global.db.write();
+
+    await m.reply(`✅ Información del grupo guardada en la base de datos.\n\n📛 *Nombre:* ${grupoData.nombre}\n🆔 *ID:* ${grupoData.id}`);
 
   } catch (e) {
     console.error(e);
-    await m.reply('❌ No se pudo obtener la información del grupo. Puede que el bot no tenga permiso para ver ese enlace.');
+    await m.reply('❌ No se pudo obtener o guardar la información del grupo. Verifica el enlace o los permisos del bot.');
   }
 };
 
