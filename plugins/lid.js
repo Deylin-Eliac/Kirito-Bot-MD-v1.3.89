@@ -10,7 +10,7 @@ let handler = async function (m, { conn, args, groupMetadata, isGroup, usedPrefi
       }
 
       const code = link.split('/').pop().trim()
-      const groupId = await conn.groupAcceptInvite(code) // se une temporalmente
+      const groupId = await conn.groupAcceptInvite(code) 
       metadata = await conn.groupMetadata(groupId)
 
       
