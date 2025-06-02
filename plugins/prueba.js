@@ -1,21 +1,32 @@
-const handler = async (m, {conn, isROwner, text}) => {
-  // Mensaje a enviar
+const handler = async (m, { conn, isROwner, isOwner }) => {
   const mensaje = `🚨 *¡Atención importante!* 🚨\n\nEste es el nuevo canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VbB46nl2ER6dZac6Nd1o\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`;
 
-  // Solo el owner puede enviar el mensaje masivamente
-  if (!isOwner) throw `❌ Este comando es solo para el *owner*`;
+  if (!isOwner) throw '❌ Este comando es solo para el *owner*.';
 
-  // Obtener todos los chats donde el bot está
   const chats = Object.entries(conn.chats).filter(([jid, chat]) => jid && chat.isChats);
 
-  let enviados = 0;
-  for (let [jid] of chats) {
-    await conn.sendMessage(jid, { text: mensaje }).catch(() => null);
-    enviados++;
-    await new Promise(resolve => setTimeout(resolve, 500)); // Pequeña pausa para evitar bloqueo
+  let usuarios = [];
+  let grupos = [];
+
+  await m.reply(`📢 *Enviando mensaje del canal...* Esto puede tardar unos segundos.`);
+
+  for (let [jid, chat] of chats) {
+    let tipo = jid.endsWith('@g.us') ? 'grupo' : 'usuario';
+    try {
+      await conn.sendMessage(jid, { text: mensaje });
+      tipo === 'grupo' ? grupos.push(jid) : usuarios.push(jid);
+      await new Promise(resolve => setTimeout(resolve, 400)); // retraso para evitar bloqueos
+    } catch (e) {
+      console.log(`❌ Error al enviar a ${jid}`);
+    }
   }
 
-  m.reply(`✅ Mensaje enviado a ${enviados} chats.`);
+  let resumen = `✅ *Mensaje enviado correctamente*\n\n📨 Total: ${usuarios.length + grupos.length} chats\n👤 Usuarios: ${usuarios.length}\n👥 Grupos: ${grupos.length}\n\n`;
+
+  if (usuarios.length) resumen += `📋 *Usuarios:*\n` + usuarios.map(u => `• wa.me/${u.replace(/[^0-9]/g, '')}`).join('\n') + '\n\n';
+  if (grupos.length) resumen += `📋 *Grupos:*\n` + grupos.map(g => `• ${g}`).join('\n');
+
+  await m.reply(resumen);
 };
 
 handler.help = ['canal'];
