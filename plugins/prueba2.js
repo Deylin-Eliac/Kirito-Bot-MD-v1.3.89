@@ -1,42 +1,41 @@
-import fs from 'fs';
-import path from 'path';
-
-const handler = async (m, { conn }) => {
+const handler = async (m, { conn, args, usedPrefix, command }) => {
   try {
-    if (!m.isGroup) throw 'Este comando solo puede usarse en grupos.';
+    if (!args[0]) {
+      throw `⚠️ Usa el comando así:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`;
+    }
 
-    const metadata = await conn.groupMetadata(m.chat);
-    const infoGrupo = {
-      id: metadata.id,
-      nombre: metadata.subject,
-      descripcion: metadata.desc || 'Sin descripción',
-      participantes: metadata.participants.map(p => ({
-        id: p.id,
-        admin: p.admin || null
-      }))
-    };
+    const enlace = args[0];
+    const codigo = enlace.split('/').pop().trim();
 
-    // Guardar en archivo temporal
-    const jsonPath = path.join('./', `grupo_${metadata.id.replace('@g.us', '')}.json`);
-    fs.writeFileSync(jsonPath, JSON.stringify(infoGrupo, null, 2));
+    if (!codigo || !enlace.includes('chat.whatsapp.com')) {
+      throw '❌ Enlace de grupo inválido. Asegúrate de copiar correctamente el link.';
+    }
 
-    await conn.sendMessage(m.chat, {
-      document: { url: jsonPath },
-      fileName: `info-grupo-${metadata.id}.json`,
-      mimetype: 'application/json'
-    }, { quoted: m });
+    // Unirse temporalmente para obtener metadata
+    const res = await conn.groupAcceptInvite(codigo);
+    const metadata = await conn.groupMetadata(res);
 
-    // Eliminar el archivo después de enviarlo
-    fs.unlinkSync(jsonPath);
+    const info = `
+📛 *Nombre:* ${metadata.subject}
+🆔 *ID:* ${metadata.id}
+📝 *Descripción:* ${metadata.desc || 'Sin descripción'}
+👥 *Participantes:* ${metadata.participants.length}
+🛡️ *Admins:* ${metadata.participants.filter(p => p.admin).length}
+`.trim();
+
+    await m.reply(info);
+
+    // Salir del grupo automáticamente si solo es para consulta
+    await conn.groupLeave(res);
   } catch (e) {
     console.error(e);
-    await m.reply('❌ Error al obtener los datos del grupo.');
+    await m.reply('❌ No se pudo obtener la información del grupo. Verifica el enlace o los permisos del bot.');
   }
 };
 
-handler.help = ['gid'];
+handler.help = ['fetch', 'get'];
 handler.tags = ['owner'];
-handler.command = ['gid'];
+handler.command = ['fetch', 'get'];
 handler.rowner = true;
 
 export default handler;
