@@ -1,6 +1,4 @@
-// Archivo: plugins/canal.js
-
-let handler = async (m, { conn, args, isOwner, usedPrefix, command }) => {
+const handler = async (m, {conn, isROwner, text}) => {
   // Mensaje a enviar
   const mensaje = `🚨 *¡Atención importante!* 🚨\n\nEste es el nuevo canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VbB46nl2ER6dZac6Nd1o\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`;
 
@@ -25,4 +23,4 @@ handler.tags = ['owner'];
 handler.command = ['canal'];
 handler.owner = true;
 
-module.exports = handler;
+export default handler;
