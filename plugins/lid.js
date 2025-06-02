@@ -3,7 +3,7 @@ let handler = async function (m, { conn, args, groupMetadata, isGroup, usedPrefi
     let metadata
 
     if (args[0]) {
-      // --- Si el argumento es un enlace ---
+      
       const link = args[0]
       if (!link.includes('chat.whatsapp.com')) {
         throw `❌ Enlace inválido.\nUsa:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
@@ -13,11 +13,11 @@ let handler = async function (m, { conn, args, groupMetadata, isGroup, usedPrefi
       const groupId = await conn.groupAcceptInvite(code) // se une temporalmente
       metadata = await conn.groupMetadata(groupId)
 
-      // ✅ Se sale después de obtener los datos (opcional)
+      
       await conn.groupLeave(groupId)
 
     } else {
-      // --- Si se usa localmente dentro de un grupo ---
+      
       if (!isGroup) {
         throw `⚠️ Este comando se debe usar dentro de un grupo o con un enlace válido.\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
       }
