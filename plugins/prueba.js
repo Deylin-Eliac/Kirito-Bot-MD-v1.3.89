@@ -13,12 +13,12 @@ function guardarRegistro(data) {
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 }
 
-async function enviarMensajeNuevoCanal(sock) {
+async function enviarMensajeNuevoCanal(sock, forzar = false) {
   try {
     const registro = cargarRegistro();
     const idSubbot = sock.user?.id || sock.user?.jid;
 
-    if (registro[idSubbot]) {
+    if (!forzar && registro[idSubbot]) {
       console.log(`ℹ️ Ya se envió el mensaje desde ${idSubbot}, no se repetirá.`);
       return;
     }
@@ -41,8 +41,10 @@ async function enviarMensajeNuevoCanal(sock) {
       await delay(1500);
     }
 
-    registro[idSubbot] = true;
-    guardarRegistro(registro);
+    if (!forzar) {
+      registro[idSubbot] = true;
+      guardarRegistro(registro);
+    }
 
     console.log('✅ Mensaje del nuevo canal enviado con éxito.');
 
@@ -50,3 +52,5 @@ async function enviarMensajeNuevoCanal(sock) {
     console.error('❌ Error al enviar el mensaje del canal:', err);
   }
 }
+
+module.exports = { enviarMensajeNuevoCanal };
