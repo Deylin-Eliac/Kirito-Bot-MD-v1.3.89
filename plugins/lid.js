@@ -1,46 +1,21 @@
-let handler = async function (m, { conn, args, usedPrefix, command }) {
-  try {
-    let metadata
+let handler = async function (m, { conn, participants, groupMetadata }) {
+if (!m.isGroup) return m.reply('Este comando solo funciona en grupos.')
 
-    if (args[0]) {
-      // 👉 Uso con URL
-      const link = args[0]
-      if (!link.includes('chat.whatsapp.com')) {
-        throw `❌ Enlace inválido.\nUsa:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
-      }
+const normalizeJid = jid => jid?.replace(/[^0-9]/g, '')
+const participantList = groupMetadata.participants || []
 
-      const code = link.split('/').pop().trim()
-      const groupId = await conn.groupAcceptInvite(code)
-      metadata = await conn.groupMetadata(groupId)
+const result = participantList.map(participant => ({
+id: participant.id,
+lid: participant.lid || null,
+admin: participant.admin || null
+}))
 
-      // Opcional: salir después
-      await conn.groupLeave(groupId)
-
-    } else {
-      // 👉 Uso local: obtener metadata manualmente
-      if (!m.isGroup) {
-        throw `⚠️ Usa este comando dentro de un grupo o con el enlace del grupo.\nEjemplo:\n${usedPrefix + command} https://chat.whatsapp.com/abc123XYZ`
-      }
-      metadata = await conn.groupMetadata(m.chat)
-    }
-
-    const participantList = metadata?.participants || []
-    const result = participantList.map(participant => ({
-      id: participant.id,
-      lid: participant.lid || null,
-      admin: participant.admin || null
-    }))
-
-    await m.reply(JSON.stringify(result, null, 2))
-  } catch (e) {
-    console.error(e)
-    await m.reply('❌ No se pudieron obtener los participantes del grupo.')
-  }
+return m.reply(JSON.stringify(result, null, 2))
 }
 
 handler.command = ['lid']
-handler.help = ['lid [enlace del grupo]']
+handler.help = ['lid']
 handler.tags = ['group']
-handler.rowner = true
 
 export default handler
+
