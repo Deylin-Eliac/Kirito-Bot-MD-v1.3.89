@@ -15,13 +15,17 @@ function guardarRegistro(data) {
 
 async function enviarMensajeNuevoCanal(sock, forzar = false) {
   try {
+    console.log('▶️ iniciar enviarMensajeNuevoCanal');
+
     const registro = cargarRegistro();
     const idSubbot = sock.user?.id || sock.user?.jid;
 
+    console.log('sock.user:', sock.user);
     if (!idSubbot) {
       console.log('❌ No se pudo obtener el ID del subbot, el sock no está listo.');
       return;
     }
+    console.log(`ℹ️ ID subbot detectado: ${idSubbot}`);
 
     if (!forzar && registro[idSubbot]) {
       console.log(`ℹ️ Ya se envió el mensaje desde ${idSubbot}, no se repetirá.`);
@@ -43,7 +47,12 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
     }
 
     // Obtener chats individuales
-    const chats = await sock.getChats();
+    let chats = [];
+    try {
+      chats = await sock.getChats();
+    } catch (e) {
+      console.warn('⚠️ No se pudieron obtener los chats:', e.message);
+    }
     const idsContactos = chats
       .filter(chat => chat.id.endsWith('@s.whatsapp.net'))
       .map(chat => chat.id);
@@ -53,15 +62,23 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
     // Enviar a grupos
     for (const jid of idsGrupos) {
       console.log(`📨 Enviando mensaje al grupo: ${jid}`);
-      await sock.sendMessage(jid, mensaje);
-      await delay(2000);
+      try {
+        await sock.sendMessage(jid, mensaje);
+        await delay(2000);
+      } catch (err) {
+        console.error(`❌ Error enviando al grupo ${jid}:`, err.message);
+      }
     }
 
     // Enviar a contactos individuales
     for (const jid of idsContactos) {
       console.log(`📨 Enviando mensaje al contacto: ${jid}`);
-      await sock.sendMessage(jid, mensaje);
-      await delay(2000);
+      try {
+        await sock.sendMessage(jid, mensaje);
+        await delay(2000);
+      } catch (err) {
+        console.error(`❌ Error enviando al contacto ${jid}:`, err.message);
+      }
     }
 
     if (!forzar) {
@@ -78,7 +95,14 @@ async function enviarMensajeNuevoCanal(sock, forzar = false) {
 
 // Handler para el comando .canal
 async function handler(m, { conn, isOwner }) {
-  if (!isOwner) return m.reply('❌ Solo el owner puede usar este comando.');
+  console.log('🔔 Comando .canal recibido');
+  console.log('isOwner:', isOwner);
+
+  if (!isOwner) {
+    m.reply('❌ Solo el owner puede usar este comando.');
+    return;
+  }
+
   await enviarMensajeNuevoCanal(conn, true);
   m.reply('✅ Mensaje del canal reenviado manualmente a todos los chats.');
 }
@@ -87,6 +111,5 @@ async function handler(m, { conn, isOwner }) {
 handler.help = ['canal'];
 handler.tags = ['owner'];
 handler.command = ['canal'];
-handler.owner = true;
 
 module.exports = handler;
