@@ -1,7 +1,7 @@
 {
 "name": "kirito-Bot-MD",
 "version": "2.2.0",
-"description": "Super WhatsApp Bot Multi Device",
+"description": "WhatsApp Bot Multi Device",
 "main": "index.js",
 "type": "module",
 "directories": {
