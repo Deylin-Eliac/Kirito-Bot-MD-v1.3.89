@@ -1,5 +1,5 @@
 const enviarAvisoCanal = async (conn, notifyChat = null) => {
-  const mensaje = `🚨 *¡Atención importante!* 🚨\n\nEste es el nuevo canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VbB46nl2ER6dZac6Nd1o\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`;
+  const mensaje = `⭐ *¡Te invitamos a nuestro canal!* 🌟\n\nEste es el canal oficial 📢 de *Kirito-Bot*:\n\n👉 https://whatsapp.com/channel/0029VawF8fBBvvsktcInIz3m\n\nSíguelo para estar al tanto de *comandos, novedades y actualizaciones*. ¡Gracias por tu apoyo! 🙌`;
 
   const chats = Object.entries(conn.chats).filter(([jid, chat]) => jid && chat.isChats);
   let usuarios = [];
