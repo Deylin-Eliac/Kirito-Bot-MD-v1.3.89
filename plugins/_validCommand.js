@@ -1,7 +1,8 @@
 export async function before(m, { conn }) { 
-  if (!m.text || !global.prefix.test(m.text)) {
-    return;
-  }
+  if (!m.text || !global.prefix.test(m.text)) return;
+
+  const chat = global.db.data.chats[m.chat];
+  if (chat?.isBanned) return; // ← Ignorar todo si el bot está baneado
 
   const usedPrefix = global.prefix.exec(m.text)[0];
   const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
@@ -16,21 +17,10 @@ export async function before(m, { conn }) {
   };
 
   if (!command) return;
-
-  if (command === "bot") {
-    return;
-  }
+  if (command === "bot") return;
 
   if (validCommand(command, global.plugins)) {
-    let chat = global.db.data.chats[m.chat];
     let user = global.db.data.users[m.sender];
-
-   /* if (chat.isBanned) {
-      const avisoDesactivado = `➳✰ 𝐄𝐥 𝐛𝐨𝐭 *${botname}* 𝐞𝐬𝐭𝐚 𝐟𝐮𝐞𝐫𝐚 𝐝𝐞 𝐬𝐞𝐫𝐯𝐢𝐜𝐢𝐨 𝐞𝐧 𝐞𝐬𝐭𝐞 𝐠𝐫𝐮𝐩𝐨✦.\n\n> ✎ 𝐔𝐧 *𝐚𝐝𝐦𝐢𝐧* 𝐩𝐮𝐞𝐝𝐞 𝐚𝐜𝐭𝐢𝐯𝐚𝐫𝐥𝐨 𝐜𝐨𝐧 𝐞𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨✦:\n> » *${usedPrefix}𝗸𝗶𝗿𝗶𝘁𝗼 𝗼𝗻*`;
-      await conn.reply(m.chat, avisoDesactivado, m, rcanal);
-      return;
-    }*/
-
     if (!user.commands) user.commands = 0;
     user.commands += 1;
   } else {
