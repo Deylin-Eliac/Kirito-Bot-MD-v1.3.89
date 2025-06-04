@@ -2,8 +2,7 @@ export async function before(m, { conn }) {
   if (!m.text || !global.prefix.test(m.text)) return;
 
   const chat = global.db.data.chats[m.chat];
-  if (chat?.isBanned) return; // ← Ignorar todo si el bot está baneado
-
+  if (chat?.isBanned) return; 
   const usedPrefix = global.prefix.exec(m.text)[0];
   const command = m.text.slice(usedPrefix.length).trim().split(' ')[0].toLowerCase();
 
