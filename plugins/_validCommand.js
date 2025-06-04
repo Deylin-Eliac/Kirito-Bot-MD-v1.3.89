@@ -25,11 +25,11 @@ export async function before(m, { conn }) {
     let chat = global.db.data.chats[m.chat];
     let user = global.db.data.users[m.sender];
 
-    if (chat.isBanned) {
+   /* if (chat.isBanned) {
       const avisoDesactivado = `➳✰ 𝐄𝐥 𝐛𝐨𝐭 *${botname}* 𝐞𝐬𝐭𝐚 𝐟𝐮𝐞𝐫𝐚 𝐝𝐞 𝐬𝐞𝐫𝐯𝐢𝐜𝐢𝐨 𝐞𝐧 𝐞𝐬𝐭𝐞 𝐠𝐫𝐮𝐩𝐨✦.\n\n> ✎ 𝐔𝐧 *𝐚𝐝𝐦𝐢𝐧* 𝐩𝐮𝐞𝐝𝐞 𝐚𝐜𝐭𝐢𝐯𝐚𝐫𝐥𝐨 𝐜𝐨𝐧 𝐞𝐥 𝐜𝐨𝐦𝐚𝐧𝐝𝐨✦:\n> » *${usedPrefix}𝗸𝗶𝗿𝗶𝘁𝗼 𝗼𝗻*`;
       await conn.reply(m.chat, avisoDesactivado, m, rcanal);
       return;
-    }
+    }*/
 
     if (!user.commands) user.commands = 0;
     user.commands += 1;
