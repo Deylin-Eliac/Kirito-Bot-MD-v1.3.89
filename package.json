@@ -1,7 +1,7 @@
 {
 "name": "kirito-Bot-MD",
 "version": "2.2.0",
-"description": "WhatsApp Bot Multi Device",
+"description": "WhatsApp Bot Multi Device ",
 "main": "index.js",
 "type": "module",
 "directories": {
@@ -20,7 +20,7 @@
 },
 "homepage": "https://github.com/deylin-eliac/Kirito-Bot-MD",
 "author": {
-"name": "Deylin+G"
+"name": "©Deylin+G"
 },
 "repository": {
 "type": "git",
