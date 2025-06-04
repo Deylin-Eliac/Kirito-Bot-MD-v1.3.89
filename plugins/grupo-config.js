@@ -9,7 +9,7 @@ let isClose = { // Switch Case Like :v
 'off': 'announcement',
 }[(args[0] || '')]
 if (isClose === undefined)
-return conn.reply(m.chat, `${emoji} *Elija una opción para configurar el grupo*\n\nEjemplo:\n*✰ #${command} on*\n*✰ #${command} off*\n*✰ #${command} close*\n*✰ #${command} open*`, m)
+return conn.reply(m.chat, `${emoji} *Elija una opción para configurar el grupo*\n\nEjemplo:\n*✰ #${command} on*\n*✰ #${command} off*\n*✰ #${command} close*\n*✰ #${command} open*`, m, rcanal)
 await conn.groupSettingUpdate(m.chat, isClose)
 
 if (isClose === 'not_announcement'){
@@ -23,6 +23,7 @@ handler.help = ['group open / close', 'grupo on / off']
 handler.tags = ['grupo']
 handler.command = ['group', 'grupo']
 handler.admin = true
+handler.botAdmin = true;
 
 
 export default handler
