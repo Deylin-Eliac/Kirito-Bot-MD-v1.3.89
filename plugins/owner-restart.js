@@ -1,19 +1,25 @@
-let handler = async (m, { conn, usedPrefix, command }) => {
-
+let handler = async (fkontak, { conn, usedPrefix, command }) => {
     try {
-        m.reply('👑 ʀᴇɪɴɪᴄɪᴀɴᴅᴏ ᴇʟ ʙᴏᴛ....')
+        
+        await conn.reply(fkontak.chat, '🛠️ Reiniciando el sistema del bot...\nPor favor, espere unos segundos.', fkontak)
+
+        
         setTimeout(() => {
+            console.log('[RESTART] Reinicio del bot solicitado por el propietario.')
             process.exit(0)
-        }, 3000) 
+        }, 3000)
+
     } catch (error) {
-        console.log(error)
-        conn.reply(m.chat, `${error}`, m)
+        
+        console.error('[ERROR][REINICIO]', error)
+        await conn.reply(fkontak.chat, `❌ Error al intentar reiniciar el bot:\n\n${error.message || error}`, fkontak)
     }
 }
 
-handler.help = ['restart']
+
+handler.help = ['restart', 'reiniciar']
 handler.tags = ['owner']
 handler.command = ['restart', 'reiniciar'] 
-handler.rowner = true
+handler.rowner = true 
 
 export default handler
