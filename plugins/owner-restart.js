@@ -1,7 +1,7 @@
-let handler = async (fkontak, { conn, usedPrefix, command }) => {
+let handler = async (m, { conn, usedPrefix, command }) => {
     try {
         
-        await conn.reply(fkontak.chat, '🛠️ Reiniciando el sistema del bot...\nPor favor, espere unos segundos.', fkontak)
+        await conn.reply(m.chat, '🛠️ Reiniciando el sistema del bot...\nPor favor, espere unos segundos.', fkontak)
 
         
         setTimeout(() => {
@@ -12,7 +12,7 @@ let handler = async (fkontak, { conn, usedPrefix, command }) => {
     } catch (error) {
         
         console.error('[ERROR][REINICIO]', error)
-        await conn.reply(fkontak.chat, `❌ Error al intentar reiniciar el bot:\n\n${error.message || error}`, fkontak)
+        await conn.reply(m.chat, `❌ Error al intentar reiniciar el bot:\n\n${error.message || error}`, fkontak)
     }
 }
 
