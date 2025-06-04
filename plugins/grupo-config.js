@@ -23,6 +23,6 @@ handler.help = ['group open / close', 'grupo on / off']
 handler.tags = ['grupo']
 handler.command = ['group', 'grupo']
 handler.admin = true
-handler.botAdmin = true
+
 
 export default handler
