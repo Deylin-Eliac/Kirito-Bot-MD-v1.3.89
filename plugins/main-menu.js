@@ -97,24 +97,6 @@ ${commandsForTag.map(menu => menu.help.map(help =>
 
     await m.react('👑');
 
-await conn.sendMessage(m.chat, { 
-      image: { url: selectedImage }, 
-      caption: menuText.trim(), 
-externalAdReply: { 
-      showAdAttribution: true, 
-      title: packname, 
-      body: dev, 
-      mediaUrl: null, 
-      description: null, 
-      previewType: "PHOTO", 
-      thumbnailUrl: icono, 
-      sourceUrl: redes, 
-      mediaType: 1, 
-      renderLargerThumbnail: false 
-      mentions: [m.sender] 
-    }, { quoted: m });
-
-
   await conn.sendMessage(m.chat, { 
       text: menuText,
       contextInfo: {
