@@ -96,18 +96,11 @@ ${commandsForTag.map(menu => menu.help.map(help =>
     let selectedImage = imageUrls[Math.floor(Math.random() * imageUrls.length)];
 
     await m.react('👑');
-    await conn.sendMessage(m.chat, { 
-  image: { url: selectedImage }, 
-  caption: menuText.trim(), 
-  mentions: [m.sender],
-  contextInfo: { 
-    isForwarded: true, 
-    forwardedNewsletterMessageInfo: { 
-      newsletterJid: channelRD.id, 
-      serverMessageId: 100, 
-      newsletterName: channelRD.name 
-    }, 
-    externalAdReply: { 
+
+await conn.sendMessage(m.chat, { 
+      image: { url: selectedImage }, 
+      caption: menuText.trim(), 
+externalAdReply: { 
       showAdAttribution: true, 
       title: packname, 
       body: dev, 
@@ -118,9 +111,8 @@ ${commandsForTag.map(menu => menu.help.map(help =>
       sourceUrl: redes, 
       mediaType: 1, 
       renderLargerThumbnail: false 
-    } 
-  }
-}, { quoted: m });
+      mentions: [m.sender] 
+    }, { quoted: m });
     throw e;
   }
 };
