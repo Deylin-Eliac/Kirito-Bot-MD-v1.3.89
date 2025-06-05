@@ -99,13 +99,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
 
   await conn.sendMessage(m.chat, { 
       caption: menuText.trim(),
-      contextInfo: {
           mentionedJid: [m.sender, userId],
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-              newsletterJid: channelRD.id,
-              newsletterName: channelRD.name,
-              serverMessageId: -1,
               image: { url: selectedImage },
           },
       },
