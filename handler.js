@@ -285,7 +285,13 @@ const bot = m.isGroup
   : {}
 const isRAdmin = user?.admin === 'superadmin'
 const isAdmin = isRAdmin || user?.admin === 'admin'
-const isBotAdmin = !!bot?.admin 
+let isBotAdmin = false
+if (m.isGroup) {
+  const metadata = await this.groupMetadata(m.chat)
+  const botNumber = this.user?.id?.split(':')[0] + '@s.whatsapp.net'
+  const botParticipant = metadata.participants.find(p => p.id === botNumber)
+  isBotAdmin = !!botParticipant?.admin
+}
 
 const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), './plugins')
 for (let name in global.plugins) {
