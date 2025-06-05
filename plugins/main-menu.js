@@ -106,16 +106,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
               newsletterJid: channelRD.id,
               newsletterName: channelRD.name,
               serverMessageId: -1,
-          },
-          forwardingScore: 999,
-          externalAdReply: {
-              title: botname,
-              body: textbot,
-              image: { url: selectedImage }, 
-              sourceUrl: redes,
-              mediaType: 1,
-              showAdAttribution: true,
-              renderLargerThumbnail: true,
+              image: { url: selectedImage },
           },
       },
   }, { quoted: m });
