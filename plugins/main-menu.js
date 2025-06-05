@@ -97,12 +97,30 @@ ${commandsForTag.map(menu => menu.help.map(help =>
 
     await m.react('👑');
     await conn.sendMessage(m.chat, { 
-      image: { url: selectedImage }, 
-      caption: menuText.trim(), 
-      mentions: [m.sender] 
-    }, { quoted: m });
-  } catch (e) {
-    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m);
+  image: { url: selectedImage }, 
+  caption: menuText.trim(), 
+  mentions: [m.sender],
+  contextInfo: { 
+    isForwarded: true, 
+    forwardedNewsletterMessageInfo: { 
+      newsletterJid: channelRD.id, 
+      serverMessageId: 100, 
+      newsletterName: channelRD.name 
+    }, 
+    externalAdReply: { 
+      showAdAttribution: true, 
+      title: packname, 
+      body: dev, 
+      mediaUrl: null, 
+      description: null, 
+      previewType: "PHOTO", 
+      thumbnailUrl: icono, 
+      sourceUrl: redes, 
+      mediaType: 1, 
+      renderLargerThumbnail: false 
+    } 
+  }
+}, { quoted: m });
     throw e;
   }
 };
