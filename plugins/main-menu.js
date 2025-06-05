@@ -122,6 +122,8 @@ ${commandsForTag.map(menu => menu.help.map(help =>
     } 
   }
 }, { quoted: m });
+      } catch (e) {
+    conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m);
     throw e;
   }
 };
