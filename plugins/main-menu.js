@@ -98,7 +98,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
     await m.react('👑');
 
   await conn.sendMessage(m.chat, { 
-      text: menuText,
+      caption: menuText.trim(),
       contextInfo: {
           mentionedJid: [m.sender, userId],
           isForwarded: true,
@@ -111,7 +111,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
           externalAdReply: {
               title: botname,
               body: textbot,
-              thumbnailUrl: imageUrls,
+              image: { url: selectedImage }, 
               sourceUrl: redes,
               mediaType: 1,
               showAdAttribution: true,
