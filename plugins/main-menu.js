@@ -111,7 +111,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
           externalAdReply: {
               title: botname,
               body: textbot,
-              thumbnailUrl: banner,
+              thumbnailUrl: imageUrls,
               sourceUrl: redes,
               mediaType: 1,
               showAdAttribution: true,
