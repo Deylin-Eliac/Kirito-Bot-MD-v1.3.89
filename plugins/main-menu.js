@@ -100,7 +100,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
       image: { url: selectedImage }, 
       caption: menuText.trim(), 
       mentions: [m.sender] 
-    }, { quoted: rcanal });
+    }, { quoted: m });
   } catch (e) {
     conn.reply(m.chat, '❎ Lo sentimos, el menú tiene un error.', m);
     throw e;
