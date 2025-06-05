@@ -39,7 +39,9 @@ let tags = {
 // no tocar 
 let handler = async (m, { conn, usedPrefix: _p }) => {
   try {
-    let userId = m.sender;
+        let userId = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
+    let user = global.db.data.users[userId]
+    let name = conn.getName(userId)
     let mode = global.opts["self"] ? "Privado" : "Público";
     let totalCommands = Object.keys(global.plugins).length;
     let totalreg = Object.keys(global.db.data.users).length;
