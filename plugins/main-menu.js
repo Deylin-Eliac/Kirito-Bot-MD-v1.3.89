@@ -118,7 +118,7 @@ ${commandsForTag.map(menu => menu.help.map(help =>
               renderLargerThumbnail: true,
           },
       },
-  }, { quoted: m })
+  }, { quoted: m });
     throw e;
   }
 };
