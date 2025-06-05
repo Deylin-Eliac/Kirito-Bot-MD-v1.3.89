@@ -239,11 +239,9 @@ if (isSubbs && !isAllowed)
 return
 
 let _user = global.db.data && global.db.data.users && global.db.data.users[m.sender]
-        //- Tesis estuvo aquí 🙀🙀
+        
 const sendNum = m.sender.replace(/[^0-9]/g, '')
-const isROwner = [conn.decodeJid(global.conn.user.id), ...global.owner.map(([number]) => number)]
-  .map(v => v.replace(/[^0-9]/g, ''))
-  .includes(sendNum)
+const isROwner = [...global.owner.map(([number]) => number)].map(v => v.replace(/[^0-9]/g, '') + detectwhat).includes(m.sender)
 
 const isOwner = isROwner || m.fromMe
 const isMods = global.mods.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
