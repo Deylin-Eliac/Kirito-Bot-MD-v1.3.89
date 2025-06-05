@@ -276,16 +276,16 @@ const participants = (m.isGroup ? groupMetadata.participants : []) || []
 const normalizeJid = jid => jid?.replace(/[^0-9]/g, '')
 const cleanJid = jid => jid?.split(':')[0] || ''
 const senderNum = normalizeJid(m.sender)
-const botNums = [this.user.jid, this.user.lid].map(j => normalizeJid(cleanJid(j)))
+const botNums = [this.user.jid, this.user.lid].filter(Boolean).map(j => normalizeJid(cleanJid(j)))
 const user = m.isGroup 
-  ? participants.find(u => normalizeJid(u.id) === senderNum) 
+  ? participants.find(u => normalizeJid(cleanJid(u.id)) === senderNum) 
   : {}
 const bot = m.isGroup 
-  ? participants.find(u => botNums.includes(normalizeJid(u.id))) 
+  ? participants.find(u => botNums.includes(normalizeJid(cleanJid(u.id)))) 
   : {}
 const isRAdmin = user?.admin === 'superadmin'
 const isAdmin = isRAdmin || user?.admin === 'admin'
-const isBotAdmin = !!bot?.admin 
+const isBotAdmin = bot?.admin === 'admin' || bot?.admin === 'superadmin'
 
 const ___dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), './plugins')
 for (let name in global.plugins) {
