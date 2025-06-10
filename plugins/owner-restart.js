@@ -1,25 +1,31 @@
-let handler = async (m, { conn, usedPrefix, command }) => {
-    try {
-        
-        await conn.reply(m.chat, '🛠️ Reiniciando el sistema del bot...\nPor favor, espere unos segundos.', fkontak)
+import { spawn } from 'child_process'
 
-        
-        setTimeout(() => {
-            console.log('[RESTART] Reinicio del bot solicitado por el propietario.')
-            process.exit(0)
-        }, 3000)
+let handler = async (m, { conn, isROwner, text }) => {
+    if (!process.send) throw 'Dont: node main.js\nDo: node index.js'
+    if (conn.user.jid == conn.user.jid) {
+        const { key } = await conn.sendMessage(m.chat, { text: `🔄 Reiniciando...` }, { quoted: m });
 
-    } catch (error) {
-        
-        console.error('[ERROR][REINICIO]', error)
-        await conn.reply(m.chat, `❌ Error al intentar reiniciar el bot:\n\n${error.message || error}`, fkontak)
-    }
+        await delay(1000);
+        await conn.sendMessage(m.chat, { text: `🔄 Reiniciando... 🔁`, edit: key });
+
+        await delay(1000);
+        await conn.sendMessage(m.chat, { text: `🔄 Reiniciando... 🔁🔁`, edit: key });
+
+        await delay(1000);
+        await conn.sendMessage(m.chat, {
+            text: `╰⊱🌩⊱ *REINICIANDO* ⊱🌩⊱╮\n🕒 Ya estaré de regreso...`,
+            edit: key
+        });
+
+        process.send('reset');
+    } else throw 'eh'
 }
 
-
-handler.help = ['restart', 'reiniciar']
+handler.help = ['restart']
 handler.tags = ['owner']
-handler.command = ['restart', 'reiniciar'] 
-handler.rowner = true 
+handler.command = ['restart', 'reiniciar']
+handler.rowner = true
 
 export default handler
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
